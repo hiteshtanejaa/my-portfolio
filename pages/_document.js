@@ -4,7 +4,7 @@ export default function Document() {
   const meta = {
     title: 'Know Hitesh Taneja',
     description: 'get to know hitesh taneja both at professional and personal level...',
-    image: '/images/hero.png'
+    image: '/images/hiteshtaneja-og.png'
   }
 
   return (
