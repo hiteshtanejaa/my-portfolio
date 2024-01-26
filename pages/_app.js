@@ -1,5 +1,6 @@
 import 'nextra-theme-blog/style.css'
 import Head from 'next/head'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import '../styles/main.css'
 
 export default function Nextra({ Component, pageProps }) {
@@ -20,6 +21,7 @@ export default function Nextra({ Component, pageProps }) {
           crossOrigin="anonymous"
         />
       </Head>
+      <SpeedInsights/>
       <Component {...pageProps} />
     </>
   )
