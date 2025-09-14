@@ -24,6 +24,12 @@ export default function Nextra({ Component, pageProps }) {
       </Head>
       <SpeedInsights/>
       <Analytics />
+      {/* Your custom banner is placed here, outside the page content */}
+      <MarqueeBanner 
+        text="Introducing the next big thing in AI!" 
+        link="/projects"
+        linkText="Read More →"
+      />
       <Component {...pageProps} />
     </>
   )
