@@ -4,38 +4,16 @@ title:
 date: 2025-02-17
 ---
 import Image from 'next/image';
+import MarqueeBanner from '../components/MarqueeBanner'; // Adjust path if needed
 
-{/* START: Thin Sticky Gradient Announcement Bar */}
+{/* START: Marquee Banner */}
+<MarqueeBanner 
+  text="Introducing the next big thing in AI! Check out my latest project" 
+  link="https://hiteshtaneja.com/projects" // Replace with your actual link
+  linkText="Read More →" 
+/>
+{/* END: Marquee Banner */}
 
-<div style={{
-position: 'sticky',
-top: 0,
-left: 0,
-width: '100%',
-zIndex: 1000,
-padding: '8px 15px',
-background: 'linear-gradient(90deg, rgba(106,17,203,1) 0%, rgba(37,117,252,1) 100%)',
-color: 'white',
-textAlign: 'center',
-fontSize: '0.9rem',
-fontWeight: '500',
-boxShadow: '0 2px 5px rgba(0, 0, 0, 0.25)'
-}}>
-📅 Want to connect or discuss a project?{' '}
-<a
-href="https://www.google.com/search?q=https://calendly.com/YOUR_USERNAME/30min"
-target="_blank"
-rel="noopener noreferrer"
-style={{
-fontWeight: 'bold',
-color: 'white',
-textDecoration: 'underline'
-}}
->
-Schedule a 1-on-1 meeting
-</a>
-</div>
-{/* END: Thin Sticky Gradient Announcement Bar */}
 # Hitesh Taneja
 AKA. Happy :)
 
