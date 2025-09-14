@@ -27,9 +27,9 @@ export default function Nextra({ Component, pageProps }) {
       <Analytics />
       {/* Your custom banner is placed here, outside the page content */}
       <MarqueeBanner 
-        text="Introducing the next big thing in AI!" 
-        link="/projects"
-        linkText="Read More →"
+        text="📅 Want to connect or discuss a project?" 
+        link="https://calendly.com/hiteshtaneja00/30min"
+        linkText="Schedule Now→"
       />
       <Component {...pageProps} />
     </>
