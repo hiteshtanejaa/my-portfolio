@@ -5,28 +5,36 @@ date: 2025-02-17
 ---
 import Image from 'next/image';
 
-{/* START: Calendly Bar */}
+{/* START: Sticky Gradient Announcement Bar */}
 <div style={{
+  position: 'sticky',
+  top: 0,
+  left: 0,
   width: '100%',
+  zIndex: 1000,
   padding: '12px 15px',
-  backgroundColor: '#f0f4f8',
-  border: '1px solid #dcdcdc',
-  borderRadius: '8px',
+  background: 'linear-gradient(90deg, rgba(106,17,203,1) 0%, rgba(37,117,252,1) 100%)',
+  color: 'white',
   textAlign: 'center',
-  marginBottom: '2rem',
-  fontSize: '0.95rem'
+  fontSize: '1rem',
+  fontWeight: '500',
+  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.25)'
 }}>
   📅 Want to connect or discuss a project?{' '}
   <a 
-    href="https://calendly.com/hiteshtaneja00/30min" 
+    href="https://calendly.com/YOUR_USERNAME/30min" 
     target="_blank" 
     rel="noopener noreferrer" 
-    style={{ fontWeight: 'bold', color: '#1a0dab' }}
+    style={{ 
+      fontWeight: 'bold', 
+      color: 'white',
+      textDecoration: 'underline'
+    }}
   >
     Schedule a 1-on-1 meeting
   </a>
 </div>
-{/* END: Calendly Bar */}
+{/* END: Sticky Gradient Announcement Bar */}
 
 # Hitesh Taneja
 AKA. Happy :)
