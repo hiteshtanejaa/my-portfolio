@@ -19,7 +19,7 @@ const MarqueeBanner = ({ text, link, linkText }) => {
       <span style={{
         display: 'inline-block',
         paddingLeft: '100%', // Start text off-screen to the right
-        animation: 'marquee 15s linear infinite', // Marquee animation
+        animation: 'marquee 30s linear infinite', // Marquee animation
         // Define keyframes for the animation (can't define directly in JSX style, so we'll need a global CSS)
       }}>
         {text}{' '}
@@ -52,3 +52,4 @@ const MarqueeBanner = ({ text, link, linkText }) => {
 };
 
 export default MarqueeBanner;
+
