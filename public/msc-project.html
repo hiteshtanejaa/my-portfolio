@@ -67,15 +67,15 @@
     </style>
 </head>
 <body class="text-gray-300">
-    <header class="w-full absolute top-0 left-0 z-20">
-    <div class="max-w-7xl mx-auto px-6 py-4">
-        <a href="/projects" class="text-gray-400 hover:text-sky-400 transition-colors duration-300 font-semibold">
-            &larr; Back to Projects
-        </a>
-    </div>
-</header>
 
-    <!-- Hero Section -->
+    <header class="w-full absolute top-0 left-0 z-20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <a href="/projects" class="text-gray-400 hover:text-sky-400 transition-colors duration-300 font-semibold">
+                &larr; Back to Projects
+            </a>
+        </div>
+    </header>
+
     <header class="min-h-screen flex items-center justify-center relative overflow-hidden p-6">
         <div class="absolute inset-0 bg-grid-gray-700/[0.2] [mask-image:linear-gradient(to_bottom,white_10%,transparent_90%)]"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
@@ -88,21 +88,19 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#demo" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">View the Demo</a>
-                <a href="https://github.com/hiteshtanejaa/MSc-Project/blob/main/Final_Pipeline.ipynb" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">Get the Code on GitHub</a>
+                <a href="https://github.com/HiteshTaneja/Interpretable-Clustering-Pipeline" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">Get the Code on GitHub</a>
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6">
 
-        <!-- The Problem Section -->
         <section id="problem" class="py-20">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-white">The Dual Challenge of High-Dimensional Data</h2>
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Clustering promises to find hidden patterns, but two major barriers stand in the way.</p>
             </div>
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Curse of Dimensionality Card -->
                 <div class="glass-card p-8" id="curse-card">
                     <div class="card-content">
                         <div class="flex items-center gap-4 mb-4">
@@ -115,48 +113,42 @@
                         <svg id="curse-animation" class="w-full h-full" viewBox="0 0 200 150"></svg>
                     </div>
                 </div>
-                <!-- Black Box Cluster Card -->
                 <div class="glass-card p-8" id="blackbox-card">
-                     <div class="card-content">
-                         <div class="flex items-center gap-4 mb-4">
+                    <div class="card-content">
+                        <div class="flex items-center gap-4 mb-4">
                             <svg class="w-10 h-10 text-fuchsia-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             <h3 class="text-2xl font-bold text-white">The "Black Box" Cluster</h3>
                         </div>
                         <p class="text-gray-400">Even when clusters are found, they're just labels like "Cluster 0." What defines this group? Why do its members belong together? The reasoning is a complete mystery.</p>
-                     </div>
-                     <div class="animation-container">
+                    </div>
+                    <div class="animation-container">
                         <svg id="blackbox-animation" class="w-full h-full" viewBox="0 0 200 150"></svg>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- The Solution Section -->
         <section id="solution" class="py-20">
-             <div class="text-center mb-12">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-white">The Solution: A 4-Stage Pipeline</h2>
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto">An automated workflow that transforms raw data into understandable insights.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Step 1 -->
                 <div class="border border-gray-800 p-6 rounded-lg transition-all duration-300 step-card">
                     <div class="text-sky-400 text-3xl font-bold mb-4">01</div>
                     <h3 class="text-xl font-semibold text-white mb-2">Configuration</h3>
                     <p class="text-gray-400 text-sm">Point the pipeline to any dataset with a simple config file. No code changes needed.</p>
                 </div>
-                <!-- Step 2 -->
                 <div class="border border-gray-800 p-6 rounded-lg transition-all duration-300 step-card">
                     <div class="text-sky-400 text-3xl font-bold mb-4">02</div>
                     <h3 class="text-xl font-semibold text-white mb-2">Preprocessing</h3>
                     <p class="text-gray-400 text-sm">Automatically handles missing values, scales numbers, and encodes categories.</p>
                 </div>
-                <!-- Step 3 -->
                 <div class="border border-gray-800 p-6 rounded-lg transition-all duration-300 step-card">
                     <div class="text-sky-400 text-3xl font-bold mb-4">03</div>
                     <h3 class="text-xl font-semibold text-white mb-2">Core Analysis</h3>
                     <p class="text-gray-400 text-sm">Reduces dimensions with UMAP/t-SNE and finds optimal clusters with k-means.</p>
                 </div>
-                <!-- Step 4 -->
                 <div class="border border-gray-800 p-6 rounded-lg transition-all duration-300 step-card">
                     <div class="text-sky-400 text-3xl font-bold mb-4">04</div>
                     <h3 class="text-xl font-semibold text-white mb-2">Interpretation</h3>
@@ -165,17 +157,19 @@
             </div>
         </section>
 
-        <!-- Live Demo / Case Study Section -->
         <section id="demo" class="py-20">
-             <div class="text-center mb-12">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-white">Live Demo: The Titanic Dataset</h2>
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto">See how the pipeline automatically rediscovers the historical reality of the disaster from raw passenger data.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8 items-center">
-                <div class="glass-card p-4 glow-border">
-                     <!-- Replace with your actual UMAP plot for the Titanic dataset -->
-                    <img src="/images/projects/msc-project.png" alt="UMAP plot of Titanic dataset showing 4 distinct clusters" class="rounded-lg w-full">
+                <div class="glass-card p-4 glow-border relative min-h-[400px]">
+                    <img src="https://i.imgur.com/uG9X0b2.png" alt="UMAP plot showing distinct passenger clusters" class="rounded-lg w-full tab-image transition-opacity duration-300" data-tab-content="features">
+                    
+                    <img src="https://i.imgur.com/5O7C7Lg.png" alt="Profile card of a prototype passenger from a cluster" class="rounded-lg w-full tab-image transition-opacity duration-300 absolute top-0 left-0 p-4 opacity-0 hidden" data-tab-content="prototype">
+                    
+                    <img src="https://i.imgur.com/sSg0s5g.png" alt="Decision tree diagram explaining the rules for a cluster" class="rounded-lg w-full tab-image transition-opacity duration-300 absolute top-0 left-0 p-4 opacity-0 hidden" data-tab-content="rules">
                 </div>
                 <div id="interpretation-module">
                     <h3 class="text-2xl font-bold text-white mb-6">Pipeline Output: Explaining the Clusters</h3>
@@ -187,9 +181,8 @@
                         </nav>
                     </div>
 
-                    <!-- Tab Content -->
                     <div id="tab-content">
-                        <div class="tab-pane active" data-tab-content="features">
+                        <div class="tab-pane" data-tab-content="features">
                             <h4 class="text-xl font-semibold text-sky-400 mb-4">Top Drivers of Separation</h4>
                             <p class="text-gray-400 mb-6">The SHAP analysis automatically identified which passenger attributes were most important for creating the groups.</p>
                             <div class="space-y-4">
@@ -198,7 +191,7 @@
                                         <span class="font-bold text-white">Passenger Class (Pclass)</span>
                                     </div>
                                 </div>
-                                 <div class="w-full bg-gray-800 rounded-full h-8 flex items-center pr-4">
+                                <div class="w-full bg-gray-800 rounded-full h-8 flex items-center pr-4">
                                     <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-8 rounded-full flex items-center pl-4" style="width: 80%;">
                                         <span class="font-bold text-white">Sex</span>
                                     </div>
@@ -212,62 +205,60 @@
                         </div>
                         <div class="tab-pane hidden" data-tab-content="prototype">
                             <h4 class="text-xl font-semibold text-sky-400 mb-2">Prototype: A Real Example</h4>
-                             <p class="text-gray-400 mb-4">The pipeline found the single most representative person (medoid) for "Cluster 0":</p>
-                             <div class="glass-card p-6">
+                            <p class="text-gray-400 mb-4">The pipeline found the single most representative person (medoid) for "Cluster 0":</p>
+                            <div class="glass-card p-6">
                                 <p><span class="font-semibold text-white">Passenger Profile:</span> Female, 38 years old, 1st Class</p>
                                 <p><span class="font-semibold text-white">Fare Paid:</span> £71.28</p>
                                 <p><span class="font-semibold text-white">Outcome:</span> <span class="text-green-400 font-bold">Survived</span></p>
-                             </div>
+                            </div>
                         </div>
-                         <div class="tab-pane hidden" data-tab-content="rules">
+                        <div class="tab-pane hidden" data-tab-content="rules">
                             <h4 class="text-xl font-semibold text-sky-400 mb-2">How to Define a Cluster</h4>
                             <p class="text-gray-400 mb-4">The Decision Tree Surrogate created this simple rule to describe the "Wealthy Survivors" cluster:</p>
-                             <div class="glass-card p-6">
+                            <div class="glass-card p-6">
                                 <code class="text-sky-300">
                                     IF <span class="text-white">Sex</span> is <span class="text-yellow-300">female</span> <br>
                                     AND <span class="text-white">Pclass</span> is less than <span class="text-yellow-300">2.5</span> <br>
                                     THEN passenger is in <span class="text-green-400 font-bold">Cluster 0</span>
                                 </code>
-                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Validation Section -->
         <section class="py-20">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-white">Validated on Diverse & Complex Datasets</h2>
                 <p class="text-gray-400 mt-4">The pipeline's robustness was proven on a wide range of real-world data.</p>
             </div>
             <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
-                 <div class="text-center text-gray-400">
+                <div class="text-center text-gray-400">
                     <svg class="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     <p class="font-semibold">Bioinformatics</p>
                     <p class="text-xs">(>20k Features)</p>
-                 </div>
-                 <div class="text-center text-gray-400">
-                     <svg class="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <div class="text-center text-gray-400">
+                    <svg class="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     <p class="font-semibold">Ecology</p>
                     <p class="text-xs">(>580k Samples)</p>
-                 </div>
-                 <div class="text-center text-gray-400">
+                </div>
+                <div class="text-center text-gray-400">
                     <svg class="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                     <p class="font-semibold">Image Rec.</p>
-                     <p class="text-xs">(70k Images)</p>
-                 </div>
-                 <div class="text-center text-gray-400">
-                     <svg class="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01V5M12 20v-1m0 1v.01M12 18v-1m0-1v-5m-6 0h12"></path></svg>
-                     <p class="font-semibold">Social Science</p>
-                     <p class="text-xs">(PISA 2018)</p>
-                 </div>
+                    <p class="font-semibold">Image Rec.</p>
+                    <p class="text-xs">(70k Images)</p>
+                </div>
+                <div class="text-center text-gray-400">
+                    <svg class="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01V5M12 20v-1m0 1v.01M12 18v-1m0-1v-5m-6 0h12"></path></svg>
+                    <p class="font-semibold">Social Science</p>
+                    <p class="text-xs">(PISA 2018)</p>
+                </div>
             </div>
         </section>
 
     </main>
     
-    <!-- Footer / CTA -->
     <footer class="mt-20 py-16 bg-gray-900/50 border-t border-gray-800">
         <div class="max-w-4xl mx-auto text-center px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Explore the Project</h2>
@@ -275,8 +266,8 @@
                 Dive deeper into the methodology, view the full source code, and read the comprehensive academic report that details the findings of this research.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                 <a href="#" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">View on GitHub</a>
-                 <a href="https://github.com/hiteshtanejaa/MSc-Project/blob/main/Report.pdf" class="border border-sky-500 text-sky-400 hover:bg-sky-500 hover:text-white font-bold py-3 px-8 rounded-full transition-all">Read the Full Report</a>
+                <a href="https://github.com/HiteshTaneja/Interpretable-Clustering-Pipeline" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">View on GitHub</a>
+                <a href="#" class="border border-sky-500 text-sky-400 hover:bg-sky-500 hover:text-white font-bold py-3 px-8 rounded-full transition-all">Read the Full Report</a>
             </div>
             <p class="text-sm text-gray-500 mt-12">&copy; 2025 Hitesh Taneja. MSc Computer Science Project.</p>
         </div>
@@ -287,25 +278,42 @@
     document.addEventListener('DOMContentLoaded', function() {
         const tabs = document.querySelectorAll('.tab-btn');
         const panes = document.querySelectorAll('.tab-pane');
+        const images = document.querySelectorAll('.tab-image'); // Select all tab images
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active', 'text-sky-400'));
-                tabs.forEach(t => t.classList.add('text-gray-400', 'hover:text-gray-200', 'border-transparent'));
+                // Deactivate all tabs, panes, and images first
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.add('text-gray-400', 'hover:text-gray-200', 'border-transparent');
+                });
                 panes.forEach(p => p.classList.add('hidden'));
+                images.forEach(i => { // Hide all images
+                    i.classList.add('hidden', 'opacity-0');
+                });
 
-                tab.classList.add('active', 'text-sky-400');
+                // Activate the clicked tab
+                tab.classList.add('active');
                 tab.classList.remove('text-gray-400', 'hover:text-gray-200', 'border-transparent');
                 
+                // Get the ID of the content to show
                 const tabId = tab.getAttribute('data-tab');
+                
+                // Show the corresponding text pane
                 const activePane = document.querySelector(`.tab-pane[data-tab-content="${tabId}"]`);
                 if (activePane) {
                     activePane.classList.remove('hidden');
                 }
+
+                // Show the corresponding image
+                const activeImage = document.querySelector(`.tab-image[data-tab-content="${tabId}"]`);
+                if (activeImage) {
+                    activeImage.classList.remove('hidden', 'opacity-0');
+                }
             });
         });
 
-        // --- NEW ANIMATION LOGIC ---
+        // --- Your existing animation logic for the cards below ---
 
         const curseCard = document.getElementById('curse-card');
         const curseAnimationSVG = document.getElementById('curse-animation');
@@ -367,14 +375,13 @@
         blackboxCard.addEventListener('mouseenter', () => {
             blackboxAnimationSVG.innerHTML = '';
             
-            // Create shapes
             const shapes = [
                 { type: 'circle', cx: 20, cy: 30, r: 5, fill: '#38bdf8', bin: 1 },
                 { type: 'rect', x: 15, y: 55, width: 10, height: 10, fill: '#34d399', bin: 2 },
                 { type: 'polygon', points: '20,80 15,90 25,90', fill: '#f87171', bin: 3 },
                 { type: 'circle', cx: 35, cy: 45, r: 5, fill: '#38bdf8', bin: 1 },
                 { type: 'rect', x: 30, y: 70, width: 10, height: 10, fill: '#34d399', bin: 2 },
-                 { type: 'polygon', points: '35,100 30,110 40,110', fill: '#f87171', bin: 3 },
+                { type: 'polygon', points: '35,100 30,110 40,110', fill: '#f87171', bin: 3 },
             ];
 
             const createSVGElement = (name, attrs) => {
@@ -392,9 +399,8 @@
                 return { el, s };
             });
 
-            // Create black box and bins
             blackboxAnimationSVG.appendChild(createSVGElement('rect', { x: 75, y: 50, width: 50, height: 50, fill: '#1f2937', stroke: '#4b5563', 'stroke-width': 1 }));
-             blackboxAnimationSVG.appendChild(createSVGElement('text', { x: 100, y: 80, fill: '#9ca3af', 'font-size': '10', 'text-anchor': 'middle'  })).textContent = '?';
+            blackboxAnimationSVG.appendChild(createSVGElement('text', { x: 100, y: 80, fill: '#9ca3af', 'font-size': '10', 'text-anchor': 'middle'  })).textContent = '?';
             
             const bins = {
                 1: { x: 150, y: 20, items: 0, fill: '#38bdf8' },
@@ -406,26 +412,23 @@
                 blackboxAnimationSVG.appendChild(createSVGElement('rect', { x: b.x, y: b.y, width: 40, height: 30, fill: 'none', stroke: b.fill, 'stroke-dasharray': '2 2' }));
             });
 
-
             const animateBlackbox = () => {
                 createdShapes.forEach((item, i) => {
                     setTimeout(() => {
-                        // Move to box
                         if(item.s.type === 'circle') {
-                             item.el.setAttribute('cx', 100); item.el.setAttribute('cy', 75);
+                            item.el.setAttribute('cx', 100); item.el.setAttribute('cy', 75);
                         } else if (item.s.type === 'rect') {
                             item.el.setAttribute('x', 95); item.el.setAttribute('y', 70);
                         } else {
                             item.el.setAttribute('transform', 'translate(80, 65)');
                         }
 
-                        // Move to bin
-                         setTimeout(() => {
-                             const bin = bins[item.s.bin];
-                             const xOffset = 160 + (bin.items % 2) * 12;
-                             const yOffset = bin.y + 15;
-                             
-                             if(item.s.type === 'circle') {
+                        setTimeout(() => {
+                            const bin = bins[item.s.bin];
+                            const xOffset = 160 + (bin.items % 2) * 12;
+                            const yOffset = bin.y + 15;
+                            
+                            if(item.s.type === 'circle') {
                                 item.el.setAttribute('cx', xOffset); item.el.setAttribute('cy', yOffset);
                             } else if (item.s.type === 'rect') {
                                 item.el.setAttribute('x', xOffset-5); item.el.setAttribute('y', yOffset-5);
@@ -433,7 +436,7 @@
                                 item.el.setAttribute('transform', `translate(${xOffset-20}, ${yOffset-85})`);
                             }
                             bin.items++;
-                         }, 800);
+                        }, 800);
 
                     }, i * 400);
                 });
@@ -441,14 +444,11 @@
             blackboxAnimationTimeout = setTimeout(animateBlackbox, 200);
         });
         
-         blackboxCard.addEventListener('mouseleave', () => {
+        blackboxCard.addEventListener('mouseleave', () => {
             clearTimeout(blackboxAnimationTimeout);
         });
-
-
     });
 </script>
 
 </body>
 </html>
-
