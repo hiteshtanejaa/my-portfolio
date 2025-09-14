@@ -2,14 +2,12 @@ const YEAR = new Date().getFullYear()
 
 export default {
   // Add the banner configuration here
+ // In theme.config.js
   banner: {
-    key: 'announcement-1', // A unique key for the banner
-    text: (
-      <a href="/projects" target="_blank" rel="noopener noreferrer">
-        🚀 Introducing the next big thing in AI! Read More →
-      </a>
-    ),
-    dismissible: true, // Allows users to close the banner
+    key: 'announcement-1',
+    // Try using a simple string first to test
+    text: '🚀 Introducing the next big thing in AI! Check out my projects.',
+    dismissible: true,
   },
 
   // Your existing footer configuration
