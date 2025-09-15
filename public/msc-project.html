@@ -165,11 +165,11 @@
 
             <div class="grid lg:grid-cols-2 gap-8 items-center">
                 <div class="glass-card p-4 glow-border relative min-h-[400px]">
-                    <img src="https://i.imgur.com/uG9X0b2.png" alt="UMAP plot showing distinct passenger clusters" class="rounded-lg w-full tab-image transition-opacity duration-300" data-tab-content="features">
+                    <img src="/images/projects/shap-analysis.png" alt="SHAP analysis plot showing feature importance" class="rounded-lg w-full tab-image transition-opacity duration-300" data-tab-content="features">
                     
-                    <img src="https://i.imgur.com/5O7C7Lg.png" alt="Profile card of a prototype passenger from a cluster" class="rounded-lg w-full tab-image transition-opacity duration-300 absolute top-0 left-0 p-4 opacity-0 hidden" data-tab-content="prototype">
+                    <img src="/images/projects/cluster-0.png.png" alt="Output showing the prototype passenger for Cluster 0" class="rounded-lg w-full tab-image transition-opacity duration-300 absolute top-0 left-0 p-4 opacity-0 hidden" data-tab-content="prototype">
                     
-                    <img src="https://i.imgur.com/sSg0s5g.png" alt="Decision tree diagram explaining the rules for a cluster" class="rounded-lg w-full tab-image transition-opacity duration-300 absolute top-0 left-0 p-4 opacity-0 hidden" data-tab-content="rules">
+                    <img src="/images/projects/decision-tree-rules.png" alt="Decision tree rules for the surrogate model" class="rounded-lg w-full tab-image transition-opacity duration-300 absolute top-0 left-0 p-4 opacity-0 hidden" data-tab-content="rules">
                 </div>
                 <div id="interpretation-module">
                     <h3 class="text-2xl font-bold text-white mb-6">Pipeline Output: Explaining the Clusters</h3>
@@ -184,42 +184,33 @@
                     <div id="tab-content">
                         <div class="tab-pane" data-tab-content="features">
                             <h4 class="text-xl font-semibold text-sky-400 mb-4">Top Drivers of Separation</h4>
-                            <p class="text-gray-400 mb-6">The SHAP analysis automatically identified which passenger attributes were most important for creating the groups.</p>
-                            <div class="space-y-4">
-                                <div class="w-full bg-gray-800 rounded-full h-8 flex items-center pr-4">
-                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-8 rounded-full flex items-center pl-4" style="width: 95%;">
-                                        <span class="font-bold text-white">Passenger Class (Pclass)</span>
-                                    </div>
-                                </div>
-                                <div class="w-full bg-gray-800 rounded-full h-8 flex items-center pr-4">
-                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-8 rounded-full flex items-center pl-4" style="width: 80%;">
-                                        <span class="font-bold text-white">Sex</span>
-                                    </div>
-                                </div>
-                                <div class="w-full bg-gray-800 rounded-full h-8 flex items-center pr-4">
-                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-8 rounded-full flex items-center pl-4" style="width: 60%;">
-                                        <span class="font-bold text-white">Age</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="text-gray-400 mb-6">SHAP analysis reveals the most influential features in forming the clusters. Passenger Class and Sex are the dominant factors.</p>
+                            <ul class="space-y-3 text-white">
+                                <li class="flex items-center gap-3"><span class="bg-sky-500/20 text-sky-400 font-bold text-sm px-2 py-1 rounded-md">1</span> Passenger Class (num_Pclass)</li>
+                                <li class="flex items-center gap-3"><span class="bg-sky-500/20 text-sky-400 font-bold text-sm px-2 py-1 rounded-md">2</span> Sex (cat_Sex_female)</li>
+                                <li class="flex items-center gap-3"><span class="bg-sky-500/20 text-sky-400 font-bold text-sm px-2 py-1 rounded-md">3</span> Port of Embarkation (cat_Embarked_S)</li>
+                            </ul>
                         </div>
                         <div class="tab-pane hidden" data-tab-content="prototype">
                             <h4 class="text-xl font-semibold text-sky-400 mb-2">Prototype: A Real Example</h4>
-                            <p class="text-gray-400 mb-4">The pipeline found the single most representative person (medoid) for "Cluster 0":</p>
+                            <p class="text-gray-400 mb-4">The pipeline identified the most representative passenger (medoid) for <span class="text-white font-semibold">Cluster 0</span>:</p>
                             <div class="glass-card p-6">
-                                <p><span class="font-semibold text-white">Passenger Profile:</span> Female, 38 years old, 1st Class</p>
-                                <p><span class="font-semibold text-white">Fare Paid:</span> £71.28</p>
-                                <p><span class="font-semibold text-white">Outcome:</span> <span class="text-green-400 font-bold">Survived</span></p>
+                                <p><span class="font-semibold text-white">Passenger Profile:</span>3rd Class</p>
+                                <p><span class="font-semibold text-white">Age:</span> around 26</p>
+                                <p><span class="font-semibold text-white">Sex:</span> male</p>
+                                <p><span class="font-semibold text-white">Fare Paid:</span> around £8.05</p>
+                                <p><span class="font-semibold text-white">Outcome:</span> <span class="text-red-400 font-bold">Did Not Survive</span></p>
                             </div>
                         </div>
                         <div class="tab-pane hidden" data-tab-content="rules">
                             <h4 class="text-xl font-semibold text-sky-400 mb-2">How to Define a Cluster</h4>
-                            <p class="text-gray-400 mb-4">The Decision Tree Surrogate created this simple rule to describe the "Wealthy Survivors" cluster:</p>
+                            <p class="text-gray-400 mb-4">A Decision Tree Surrogate model (86.76% accuracy) was trained to generate simple, readable rules. Here's a key rule it discovered for identifying members of <span class="text-white font-semibold">Cluster 1</span>:</p>
                             <div class="glass-card p-6">
                                 <code class="text-sky-300">
-                                    IF <span class="text-white">Sex</span> is <span class="text-yellow-300">female</span> <br>
-                                    AND <span class="text-white">Pclass</span> is less than <span class="text-yellow-300">2.5</span> <br>
-                                    THEN passenger is in <span class="text-green-400 font-bold">Cluster 0</span>
+                                    IF <span class="text-white">Passenger Sex</span> is <span class="text-yellow-300">Male</span><br>
+                                    AND <span class="text-white"> Class</span> is <span class="text-yellow-300">3rd class</span><br>
+                                    AND <span class="text-white">Embarked</span> at <span class="text-yellow-300">Southampton</span><br>
+                                    THEN passenger is in <span class="text-fuchsia-400 font-bold">Cluster 0</span>
                                 </code>
                             </div>
                         </div>
