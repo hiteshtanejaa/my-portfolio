@@ -63,8 +63,8 @@
         // To add a new job, just copy one of the objects and fill in your details.
         // Replace '#' with the actual links.
         const jobs = [
-            { company: 'Acron Aviation', title: 'No Jobs Found', jobId: '#', jobLink: '#', resumeLink: '#' },
-            { company: 'Thales', title: 'ML Ops Engineer', jobId: 'R0266011', jobLink: 'https://careers.thalesgroup.com/global/en/job/R0266011/ML-Ops-Engineer', resumeLink: '/Refer/Thales/Hitesh Taneja Resume.docx' },
+            { company: 'Acron Aviation', title: 'No Jobs Found', jobId: '#', jobLink: '#', resumeLink: '#', status: 'N/A' },
+            { company: 'Thales', title: 'ML Ops Engineer', jobId: 'R0266011', jobLink: 'https://careers.thalesgroup.com/global/en/job/R0266011/ML-Ops-Engineer', resumeLink: '/Refer/Thales/Hitesh Taneja Resume.docx', status: 'Pending'},
             { company: 'Boeing', title: 'Associate Data Solutions Architect', jobId: 'JR2025472724', jobLink: 'https://jobs.boeing.com/job/bengaluru/associate-data-solutions-architect/185/86061508016#:~:text=Position%20Responsibilities%3A', resumeLink: '/Refer/Boeing/Hitesh Taneja Resume.docx' },
             { company: 'BAE Systems', title: 'Business Analyst', jobId: 'N/A', jobLink: 'https://jobsearch.baesystems.com/job/business-analyst-00130204#:~:text=Location%3A%20Barrow,options%20for%20this%20particular%20role', resumeLink: '/Refer/BAE/Hitesh Taneja Resume.docx' },
             { company: 'Barclays', title: 'Business Analyst', jobId: 'BCLYJP00055679', jobLink: 'https://barclays.talent-community.com/projects/business-analyst/55556', resumeLink: '/Refer/Barclays/Hitesh Taneja Resume.docx' },
@@ -134,6 +134,9 @@
                                     <img src="https://logo.clearbit.com/${job.company.toLowerCase().replace(/ /g, '').replace(/&/g,'').split(',')[0]}.com?size=50" 
                                          onerror="this.onerror=null;this.src='https://placehold.co/50x50/374151/E5E7EB?text=${job.company.charAt(0)}';" 
                                          alt="${job.company} Logo" class="h-12 w-12 rounded-lg bg-gray-700 object-contain p-1">
+                                    <span class="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold leading-none ${job.status.toLowerCase() === 'done' ? 'bg-green-500 text-green-900' : 'bg-yellow-400 text-yellow-900'}">
+                                        ${job.status}
+                                    </span>
                                 </div>
                             </div>
                             <div class="mt-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
