@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Hitesh Taneja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav>
+      <a href="index.html" class="logo">HT</a>
+      <div class="nav-links">
+        <a href="projects.html" style="color:var(--cyan)">Projects</a>
+        <a href="story.html">Story</a>
+        <a href="setup.html">Setup</a>
+        <a href="resume.pdf" target="_blank" rel="noopener" class="nav-cta">Resume ↗</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="projects.html">Projects</a>
+      <a href="story.html">Story</a>
+      <a href="setup.html">Setup</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <a href="https://www.linkedin.com/in/hiteshtanejaa/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hiteshtanejaa" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <main class="subpage-wrap">
+
+    <!-- HEADER -->
+    <div class="subpage-header">
+      <span class="subpage-eyebrow">Portfolio · Work</span>
+      <h1 class="subpage-title">PROJECTS</h1>
+      <p class="subpage-desc">AI systems, data engineering, research and frontend — things I've built, shipped, and learned from.</p>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="projects-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ai">AI &amp; LLMs</button>
+      <button class="filter-btn" data-filter="ml">ML &amp; Research</button>
+      <button class="filter-btn" data-filter="data">Data Engineering</button>
+      <button class="filter-btn" data-filter="fe">Frontend</button>
+    </div>
+
+    <!-- PROJECT GRID -->
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- Customer Support Bot — LIVE -->
+      <article class="proj-card" data-category="ai">
+        <span class="proj-badge badge-live"><span class="badge-dot"></span>Live · AI Agent</span>
+        <h2 class="proj-title">Customer Support &amp; Lead Generation Bot</h2>
+        <p class="proj-desc">A production AI agent handling customer queries and qualifying leads in real time. Combines natural language understanding with structured lead capture — turning conversations into business outcomes. Deployed on Railway.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">LLMs</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">Railway</span>
+          <span class="stack-tag">NLP</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://web-production-fc9b9.up.railway.app/" target="_blank" rel="noopener" class="proj-link">Live Demo ↗</a>
+        </div>
+      </article>
+
+      <!-- Cluster Intelligence — AI/ML Research -->
+      <article class="proj-card" data-category="ml">
+        <span class="proj-badge badge-ml"><span class="badge-dot"></span>ML · Research</span>
+        <h2 class="proj-title">Cluster Intelligence Pipeline</h2>
+        <p class="proj-desc">End-to-end Python pipeline solving the 'black box' problem in clustering. Automates dimensionality reduction (UMAP, t-SNE, PCA) and generates human-readable cluster interpretations via SHAP values and decision rules — transforming abstract clusters into actionable insights.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">UMAP</span>
+          <span class="stack-tag">t-SNE</span>
+          <span class="stack-tag">SHAP</span>
+          <span class="stack-tag">scikit-learn</span>
+          <span class="stack-tag">Plotly</span>
+        </div>
+        <div class="proj-links">
+          <a href="/msc-project.html" target="_blank" rel="noopener" class="proj-link">Project Page ↗</a>
+          <a href="https://github.com/hiteshtanejaa/MSc-Project/tree/main" target="_blank" rel="noopener" class="proj-link">GitHub ↗</a>
+        </div>
+      </article>
+
+      <!-- RAG System — AI Production -->
+      <article class="proj-card" data-category="ai">
+        <span class="proj-badge badge-ai"><span class="badge-dot"></span>AI · Production</span>
+        <h2 class="proj-title">RAG-Based Internal Knowledge System</h2>
+        <p class="proj-desc">Architected the retrieval infrastructure for an internal Q&amp;A tool at Accenture (NatWest Group). Vector Databases serve unstructured banking documents to an LLM, enabling staff to query institutional knowledge in natural language — deployed in a live banking environment.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">Vector DBs</span>
+          <span class="stack-tag">LLMs</span>
+          <span class="stack-tag">RAG</span>
+          <span class="stack-tag">Embeddings</span>
+        </div>
+        <div class="proj-links">
+          <span class="proj-link muted">Internal project — NDA</span>
+        </div>
+      </article>
+
+      <!-- Porsche Frontend Design — NEW -->
+      <article class="proj-card" data-category="fe">
+        <span class="proj-badge badge-fe"><span class="badge-dot"></span>Frontend · Design</span>
+        <h2 class="proj-title">Frontend Design: Porsche 911</h2>
+        <p class="proj-desc">Premium scroll-driven landing page for Porsche 911 Turbo S. Canvas frame-by-frame animation (192 WebP frames), circle-wipe hero reveal, horizontal marquees, staggered section animations, counter animations. Zero frameworks — pure HTML, CSS, GSAP and Lenis.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">HTML/CSS</span>
+          <span class="stack-tag">GSAP</span>
+          <span class="stack-tag">Lenis</span>
+          <span class="stack-tag">Canvas API</span>
+          <span class="stack-tag">ScrollTrigger</span>
+          <span class="stack-tag">FFmpeg</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="proj-link muted" title="Coming soon">GitHub ↗ (coming soon)</a>
+        </div>
+      </article>
+
+      <!-- Netflix Case Study -->
+      <article class="proj-card" data-category="data">
+        <span class="proj-badge badge-data"><span class="badge-dot"></span>Data · Case Study</span>
+        <h2 class="proj-title">Netflix Content Strategy Analysis</h2>
+        <p class="proj-desc">Deep dive into 8,800+ Netflix catalog data points to identify viewership trends. Revealed that adding TV Shows in July &amp; December could increase viewership by up to 15%, providing data-driven insights for content allocation decisions.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Pandas</span>
+          <span class="stack-tag">Matplotlib</span>
+          <span class="stack-tag">Seaborn</span>
+          <span class="stack-tag">EDA</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://medium.com/@hiteshtaneja/data-exploration-and-visualisation-netflix-5e987bc6f150" target="_blank" rel="noopener" class="proj-link">Case Study ↗</a>
+          <a href="https://www.kaggle.com/code/hiteshtaneja/netflix-business-case-study" target="_blank" rel="noopener" class="proj-link">Notebook ↗</a>
+        </div>
+      </article>
+
+      <!-- Aerofit Case Study -->
+      <article class="proj-card" data-category="ml">
+        <span class="proj-badge badge-ml"><span class="badge-dot"></span>ML · Case Study</span>
+        <h2 class="proj-title">Aerofit Customer Intelligence</h2>
+        <p class="proj-desc">Identified key customer characteristics influencing treadmill model purchases using outlier detection, correlation heatmaps, and probability analysis. Estimated 10–15% uplift in sales conversions via data-driven product recommendations.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Pandas</span>
+          <span class="stack-tag">Seaborn</span>
+          <span class="stack-tag">Probability</span>
+          <span class="stack-tag">Outlier Detection</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://www.kaggle.com/code/hiteshtaneja/aerofit-case-study" target="_blank" rel="noopener" class="proj-link">Notebook ↗</a>
+        </div>
+      </article>
+
+      <!-- Profit Dashboard -->
+      <article class="proj-card" data-category="data">
+        <span class="proj-badge badge-data"><span class="badge-dot"></span>Data · Dashboard</span>
+        <h2 class="proj-title">Profit Analysis Dashboard</h2>
+        <p class="proj-desc">Interactive Tableau dashboard on the Superstore dataset providing a comprehensive overview of profit trends across time frames, product categories, and geographies — designed for executive-level decision making.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Tableau</span>
+          <span class="stack-tag">SQL</span>
+          <span class="stack-tag">Business Intelligence</span>
+          <span class="stack-tag">Data Viz</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://public.tableau.com/app/profile/hitesh.taneja/viz/ProfitDashboardsuperstore_16835174249980/Dashboard1" target="_blank" rel="noopener" class="proj-link">Live Dashboard ↗</a>
+        </div>
+      </article>
+
+    </div><!-- /projects-grid -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="site-footer-copy">© 2026 Hitesh Taneja</span>
+    <div class="site-footer-links">
+      <a href="https://github.com/hiteshtanejaa" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/hiteshtanejaa/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://calendly.com/hiteshtaneja00/30min" target="_blank" rel="noopener">Schedule a Call</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    document.getElementById('nav-hamburger').addEventListener('click', function() {
+      document.getElementById('nav-mobile').classList.toggle('open');
+      this.classList.toggle('active');
+    });
+
+    // Filter tabs
+    const btns  = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.proj-card');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.display = show ? 'flex' : 'none';
+          if (show) {
+            card.style.animation = 'none';
+            card.offsetHeight; // reflow
+            card.style.animation = 'card-fade-in 0.4s ease both';
+          }
+        });
+      });
+    });
+  </script>
+
+  <style>
+    @keyframes card-fade-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</body>
+</html>

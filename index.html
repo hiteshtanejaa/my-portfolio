@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hitesh Taneja — Data Engineer &amp; AI Builder</title>
+  <meta name="description" content="Data Engineer and AI Systems Builder. Ex-Accenture (NatWest Group). MSc AI &amp; ML." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== LOADER ===================== -->
+  <div id="loader">
+    <div class="loader-brand">
+      <span class="loader-name">HITESH TANEJA</span>
+      <span class="loader-role">Data Engineer · AI Builder</span>
+    </div>
+    <div id="loader-bar"><div id="loader-bar-fill"></div></div>
+    <div id="loader-percent">Initialising</div>
+  </div>
+
+  <!-- ===================== FIXED HEADER ===================== -->
+  <header class="site-header">
+    <nav>
+      <a href="index.html" class="logo">HT</a>
+
+      <div class="nav-links">
+        <a href="projects.html">Projects</a>
+        <a href="story.html">Story</a>
+        <a href="setup.html">Setup</a>
+        <a href="resume.pdf" target="_blank" rel="noopener" class="nav-cta">Resume ↗</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="projects.html">Projects</a>
+      <a href="story.html">Story</a>
+      <a href="setup.html">Setup</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <a href="https://www.linkedin.com/in/hiteshtanejaa/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hiteshtanejaa" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://calendly.com/hiteshtaneja00/30min" target="_blank" rel="noopener">Schedule a Call</a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO STANDALONE ===================== -->
+  <section class="hero-standalone" id="hero-section">
+    <div class="hero-inner">
+      <span class="hero-label">Data Engineer · AI Systems Builder · MSc AI&nbsp;&amp;&nbsp;ML</span>
+      <h1 class="hero-heading">
+        <span class="word">HITESH</span>
+        <span class="word hero-word-dim">TANEJA</span>
+      </h1>
+      <p class="hero-tagline">
+        Building the infrastructure<br />that powers modern intelligence.
+      </p>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===================== CANVAS (neural network) ===================== -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- ===================== DARK OVERLAY ===================== -->
+  <div id="dark-overlay" aria-hidden="true"></div>
+
+  <!-- ===================== MARQUEE 1 ===================== -->
+  <div class="marquee-wrap" id="marquee-1" data-scroll-speed="-28">
+    <div class="marquee-text">
+      EX-ACCENTURE &nbsp;·&nbsp; NATWEST GROUP &nbsp;·&nbsp; MSc AI &amp; ML &nbsp;·&nbsp;
+      DATA ENGINEER &nbsp;·&nbsp; AI SYSTEMS BUILDER &nbsp;·&nbsp; UK-BASED &nbsp;·&nbsp;
+      EX-ACCENTURE &nbsp;·&nbsp; NATWEST GROUP &nbsp;·&nbsp; MSc AI &amp; ML &nbsp;·&nbsp;
+      DATA ENGINEER &nbsp;·&nbsp; AI SYSTEMS BUILDER &nbsp;·&nbsp; UK-BASED &nbsp;·&nbsp;
+    </div>
+  </div>
+
+  <!-- ===================== MARQUEE 2 ===================== -->
+  <div class="marquee-wrap marquee-bottom" id="marquee-2" data-scroll-speed="20">
+    <div class="marquee-text">
+      PYTHON &nbsp;◆&nbsp; PYSPARK &nbsp;◆&nbsp; FASTAPI &nbsp;◆&nbsp; LLMs &nbsp;◆&nbsp;
+      VECTOR&nbsp;DBs &nbsp;◆&nbsp; RAG &nbsp;◆&nbsp; SQL &nbsp;◆&nbsp; AWS &nbsp;◆&nbsp;
+      DOCKER &nbsp;◆&nbsp; SPARK &nbsp;◆&nbsp;
+      PYTHON &nbsp;◆&nbsp; PYSPARK &nbsp;◆&nbsp; FASTAPI &nbsp;◆&nbsp; LLMs &nbsp;◆&nbsp;
+    </div>
+  </div>
+
+  <!-- ===================== SCROLL CONTAINER ===================== -->
+  <div id="scroll-container">
+
+    <!-- 002 / Engineering — slide-left -->
+    <section class="scroll-section section-content align-left"
+             data-enter="5" data-leave="18" data-animation="slide-left">
+      <div class="section-inner">
+        <span class="section-label">002 / Engineering</span>
+        <h2 class="section-heading">Pipelines.<br />APIs. Systems.</h2>
+        <p class="section-body">PySpark ETL workflows, FastAPI backends, CI/CD pipelines. I build the data backbone — production-grade infrastructure that makes intelligent systems possible at scale.</p>
+      </div>
+    </section>
+
+    <!-- 003 / AI — slide-right -->
+    <section class="scroll-section section-content align-right"
+             data-enter="18" data-leave="31" data-animation="slide-right">
+      <div class="section-inner">
+        <span class="section-label">003 / Artificial Intelligence</span>
+        <h2 class="section-heading">RAG. Vector&nbsp;DBs.<br />Real&nbsp;LLMs.</h2>
+        <p class="section-body">Architected production RAG systems serving unstructured banking documents to LLMs. Bridging data engineering and AI — making language models useful in real-world environments, not just demos.</p>
+      </div>
+    </section>
+
+    <!-- 004 / Customer Support Bot — scale-up, NEW PROJECT -->
+    <section class="scroll-section section-content align-left"
+             data-enter="31" data-leave="43" data-animation="scale-up">
+      <div class="section-inner">
+        <span class="section-label">004 / Live Project</span>
+        <h2 class="section-heading">AI Support<br />&amp;&nbsp;Lead&nbsp;Bot.</h2>
+        <p class="section-body">Customer Support and Lead Generation Bot — a live AI agent handling queries, qualifying leads, and converting conversations into business outcomes. Deployed and running in production.</p>
+        <div class="section-links">
+          <a href="https://web-production-fc9b9.up.railway.app/" target="_blank" rel="noopener" class="section-link">Live Demo ↗</a>
+          <a href="projects.html" class="section-link dim">View All Projects →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 005 / Research — rotate-in -->
+    <section class="scroll-section section-content align-right"
+             data-enter="43" data-leave="55" data-animation="rotate-in">
+      <div class="section-inner">
+        <span class="section-label">005 / Research</span>
+        <h2 class="section-heading">MSc&nbsp;Thesis.<br />Cluster&nbsp;Intelligence.</h2>
+        <p class="section-body">End-to-end pipeline solving the black-box problem in clustering — UMAP/t-SNE + SHAP-powered human-readable interpretations. University of Greenwich, 2024.</p>
+      </div>
+    </section>
+
+    <!-- STATS — stagger-up, dark overlay -->
+    <section class="scroll-section section-stats"
+             data-enter="55" data-leave="70" data-animation="stagger-up">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-number" data-value="3" data-decimals="0">0</span>
+          <span class="stat-suffix">+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="2" data-decimals="0">0</span>
+          <span class="stat-suffix"></span>
+          <span class="stat-label">Production AI Systems</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="40" data-decimals="0">0</span>
+          <span class="stat-suffix">%</span>
+          <span class="stat-label">Query Speedup</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="63" data-decimals="0">0</span>
+          <span class="stat-suffix"></span>
+          <span class="stat-label">Bank Branches Decommissioned</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 006 / Porsche Frontend — clip-reveal, NEW PROJECT -->
+    <section class="scroll-section section-content align-left"
+             data-enter="70" data-leave="82" data-animation="clip-reveal">
+      <div class="section-inner">
+        <span class="section-label">006 / Frontend Design</span>
+        <h2 class="section-heading">Porsche.<br />Scroll-Driven.</h2>
+        <p class="section-body">Premium scroll-driven landing page for Porsche 911 — canvas frame animation, circle-wipe reveals, horizontal marquees, GSAP + Lenis. Pure HTML/CSS/JS, zero frameworks.</p>
+        <div class="section-links">
+          <a href="#" class="section-link dim" title="Link coming soon">GitHub ↗ (coming soon)</a>
+          <a href="projects.html" class="section-link dim">All Projects →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA — fade-up, persist -->
+    <section class="scroll-section section-cta align-right"
+             data-enter="82" data-leave="100" data-animation="fade-up"
+             data-persist="true">
+      <div class="section-inner">
+        <span class="section-label">007 / Let's Build</span>
+        <h2 class="section-heading">Open to<br />Opportunities.</h2>
+        <p class="section-body">Available for Data Engineering and AI roles. MSc AI&nbsp;&amp;&nbsp;ML. Ex-Accenture. Let's make something real.</p>
+        <div class="cta-row">
+          <a href="https://calendly.com/hiteshtaneja00/30min" target="_blank" rel="noopener" class="cta-button">
+            Schedule a Call <span class="cta-arrow">→</span>
+          </a>
+          <a href="projects.html" class="cta-link">View Projects →</a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /scroll-container -->
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Mobile nav toggle
+    document.getElementById('nav-hamburger').addEventListener('click', function() {
+      document.getElementById('nav-mobile').classList.toggle('open');
+      this.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
