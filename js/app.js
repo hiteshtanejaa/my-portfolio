@@ -261,7 +261,7 @@ function initDarkOverlay() {
       if (p >= OVERLAY_ENTER - OVERLAY_FADE && p <= OVERLAY_ENTER) {
         o = (p - (OVERLAY_ENTER - OVERLAY_FADE)) / OVERLAY_FADE;
       } else if (p > OVERLAY_ENTER && p < OVERLAY_LEAVE) {
-        o = 0.91;
+        o = 0.96;
       } else if (p >= OVERLAY_LEAVE && p <= OVERLAY_LEAVE + OVERLAY_FADE) {
         o = 0.91 * (1 - (p - OVERLAY_LEAVE) / OVERLAY_FADE);
       }
