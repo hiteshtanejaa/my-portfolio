@@ -825,6 +825,76 @@ body {
   max-width: 680px;
 }
 
+/* Education cards */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0 40px;
+}
+
+.edu-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 22px 20px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple-light));
+}
+.edu-card:hover {
+  border-color: rgba(0,212,255,0.22);
+  transform: translateY(-2px);
+}
+
+.edu-degree {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.edu-field {
+  font-size: 0.78rem;
+  color: var(--cyan);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.edu-institution {
+  font-size: 0.83rem;
+  color: var(--text-dim);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.edu-period {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  font-family: 'Fira Code', monospace;
+  color: var(--text-ghost);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+@media (max-width: 520px) {
+  .edu-grid { grid-template-columns: 1fr; }
+}
+
 .story-body h2 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.5rem);
