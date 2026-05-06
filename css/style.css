@@ -371,11 +371,11 @@ body {
 }
 
 /* =============================================================
-   SCROLL CONTAINER  (900vh)
+   SCROLL CONTAINER  (720vh)
    ============================================================= */
 #scroll-container {
   position: relative;
-  height: 900vh;
+  height: 720vh;
   z-index: 1;
 }
 
@@ -403,14 +403,14 @@ body {
 .align-right .section-inner { max-width: 40vw; }
 
 /* Absolute vertical positions = midpoint of data-enter/data-leave %
-   Matches index.html: enter 5,18,31,43,55,70,82 */
-[data-enter="5"]  { top: 11.5%; }   /* (5+18)/2  */
-[data-enter="18"] { top: 24.5%; }   /* (18+31)/2 */
-[data-enter="31"] { top: 37%;   }   /* (31+43)/2 */
-[data-enter="43"] { top: 49%;   }   /* (43+55)/2 */
-[data-enter="55"] { top: 62.5%; }   /* (55+70)/2 */
-[data-enter="70"] { top: 76%;   }   /* (70+82)/2 */
-[data-enter="82"] { top: 91%;   }   /* (82+100)/2 */
+   Matches index.html: enter 2,13,25,36,48,63,75 */
+[data-enter="2"]  { top: 7.5%;  }   /* (2+13)/2  */
+[data-enter="13"] { top: 19%;   }   /* (13+25)/2 */
+[data-enter="25"] { top: 30.5%; }   /* (25+36)/2 */
+[data-enter="36"] { top: 42%;   }   /* (36+48)/2 */
+[data-enter="48"] { top: 55.5%; }   /* (48+63)/2 */
+[data-enter="63"] { top: 69%;   }   /* (63+75)/2 */
+[data-enter="75"] { top: 87.5%; }   /* (75+100)/2 */
 
 /* =============================================================
    SECTION TYPOGRAPHY
@@ -1148,7 +1148,7 @@ body {
   .scroll-indicator { display: none; }   /* save space on mobile */
 
   /* ── SCROLL SECTIONS ── */
-  #scroll-container { height: 700vh; }
+  #scroll-container { height: 560vh; }
 
   .align-left, .align-right {
     padding-left: 0;
