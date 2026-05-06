@@ -456,15 +456,43 @@ body {
    ============================================================= */
 .section-stats {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 36px;
   padding: 4vh 8vw;
+  /* Must sit ABOVE dark overlay (z-index:3) so text is readable */
+  position: relative;
+  z-index: 4;
+}
+
+/* Stats section header */
+.stats-header {
+  text-align: center;
+}
+
+.stats-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.stats-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4vw;
+  gap: 2px;
   width: 100%;
   max-width: 1100px;
   text-align: center;
@@ -474,12 +502,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0;
+  padding: 0 2vw;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.stat:last-child { border-right: none; }
+
+/* Context label — sits ABOVE the number */
+.stat-context {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.65;
+  margin-bottom: 8px;
+}
+
+/* Number + suffix in one row */
+.stat-value-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1;
 }
 
 .stat-number {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 8vw, 9rem);
+  font-size: clamp(3.5rem, 7vw, 8rem);
   line-height: 1;
   background: linear-gradient(135deg, var(--cyan), var(--purple-light));
   -webkit-background-clip: text;
@@ -490,19 +540,20 @@ body {
 
 .stat-suffix {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 5rem);
+  font-size: clamp(1.8rem, 3.5vw, 4rem);
   color: var(--purple-light);
-  margin-top: -8px;
-  line-height: 1;
+  line-height: 1.1;
+  padding-top: 4px;
 }
 
+/* Description label — sits BELOW the number, fully readable */
 .stat-label {
-  font-size: 0.67rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-ghost);
-  margin-top: 4px;
-  line-height: 1.4;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(232, 228, 255, 0.55);
+  margin-top: 10px;
+  max-width: 18ch;
+  font-weight: 300;
 }
 
 /* =============================================================
@@ -1117,14 +1168,23 @@ body {
   .section-label   { font-size: 0.62rem; }
 
   /* ── STATS ── */
-  .section-stats { padding: 2vh 5vw; }
+  .section-stats   { padding: 2vh 4vw; gap: 24px; }
+  .stats-subtitle  { font-size: clamp(1.4rem, 5vw, 2rem); }
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 6vw;
+    gap: 0;
   }
-  .stat-number  { font-size: clamp(2.5rem, 9vw, 4.5rem); }
-  .stat-suffix  { font-size: clamp(1.4rem, 4vw, 2.5rem); }
-  .stat-label   { font-size: 0.62rem; }
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 4vw;
+  }
+  .stat:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,0.06); }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-number  { font-size: clamp(2.8rem, 10vw, 4.5rem); }
+  .stat-suffix  { font-size: clamp(1.4rem, 5vw, 2.5rem); }
+  .stat-label   { font-size: 0.72rem; max-width: 100%; }
+  .stat-context { font-size: 0.6rem; }
 
   /* ── MARQUEES ── */
   .marquee-text                 { font-size: 18vw; }
@@ -1168,8 +1228,8 @@ body {
   .align-left  .section-inner,
   .align-right .section-inner { padding: 1.4rem; margin: 0 3vw; }
 
-  .stats-grid  { gap: 1.6rem 5vw; }
-  .stat-number { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  .stat-number { font-size: clamp(2.4rem, 11vw, 3.8rem); }
+  .stat-label  { font-size: 0.68rem; }
 
   .story-social-grid { grid-template-columns: 1fr; }
 
