@@ -6,8 +6,8 @@
 "use strict";
 
 // ─── DARK OVERLAY TIMING (0–1) ────────────────────────────────
-const OVERLAY_ENTER = 0.55;
-const OVERLAY_LEAVE = 0.70;
+const OVERLAY_ENTER = 0.55;   /* matches data-enter="55" */
+const OVERLAY_LEAVE = 0.70;   /* matches data-leave="70" */
 const OVERLAY_FADE  = 0.04;
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
