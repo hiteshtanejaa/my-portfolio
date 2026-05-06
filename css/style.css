@@ -470,6 +470,7 @@ body {
 /* Stats section header */
 .stats-header {
   text-align: center;
+   color: #fff;
 }
 
 .stats-eyebrow {
@@ -497,6 +498,7 @@ body {
   width: 100%;
   max-width: 1100px;
   text-align: center;
+   color: #fff;
 }
 
 .stat {
@@ -506,6 +508,7 @@ body {
   gap: 0;
   padding: 0 2vw;
   border-right: 1px solid rgba(255,255,255,0.1);
+   color: #fff;
 }
 .stat:last-child { border-right: none; }
 
@@ -526,6 +529,7 @@ body {
   align-items: flex-start;
   gap: 2px;
   line-height: 1;
+   color: #fff;
 }
 
 .stat-number {
@@ -536,6 +540,7 @@ body {
   -webkit-text-fill-color: #fff;
   background: none;
   letter-spacing: -0.02em;
+   color: #fff;
 }
 
 .stat-suffix {
@@ -555,6 +560,7 @@ body {
   margin-top: 10px;
   max-width: 18ch;
   font-weight: 300;
+   color: #fff;
 }
 
 /* =============================================================
