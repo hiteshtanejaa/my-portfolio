@@ -464,6 +464,7 @@ body {
   /* Must sit ABOVE dark overlay (z-index:3) so text is readable */
   position: relative;
   z-index: 4;
+   color: #fff;
 }
 
 /* Stats section header */
