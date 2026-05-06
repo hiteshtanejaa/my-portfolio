@@ -4,69 +4,119 @@ title: Projects
 date: 2025-09-14
 ---
 
-# Photos
+import ProjectCard from '../components/ProjectCard'
 
-Here's some of my projects.
+<div className="projects-page">
 
-import Image from 'next/image'
+<div className="projects-page-header">
 
-## Academic Research
-<Image
-  src="/images/projects/msc-project.png"
-  alt="t-SNE plot of the Titanic dataset showing distinct clusters"
-  width={1000}
-  height={300}
-  priority
-  className="next-image"
+# Projects
+
+Shipping AI & data systems — from research pipelines to production infrastructure.
+
+</div>
+
+<div className="projects-section">
+<div className="projects-section-label">
+  <span>AI & Machine Learning</span>
+</div>
+
+<div className="projects-grid">
+
+<ProjectCard
+  badge="AI · Research"
+  badgeType="ai"
+  title="Cluster Intelligence Pipeline"
+  description="End-to-end Python pipeline that solves the 'black box' problem in unsupervised learning. Automates dimensionality reduction (UMAP, t-SNE, PCA), clustering, and generates human-readable interpretations via SHAP values and decision rules — turning abstract clusters into actionable insights."
+  stack={['Python', 'UMAP', 't-SNE', 'SHAP', 'scikit-learn', 'Plotly', 'NumPy']}
+  links={[
+    { label: 'Project Page', href: '/msc-project.html' },
+    { label: 'GitHub', href: 'https://github.com/hiteshtanejaa/MSc-Project/tree/main' }
+  ]}
 />
-Cluster Interpretation Via Dimenisonality Reduction
-Developed an end-to-end Python pipeline to solve the 'black box' problem in clustering. This project automates the process from data preprocessing and dimensionality reduction (UMAP/t-SNE) to generating human-readable interpretations (SHAP, decision rules) that explain *why* data points are grouped together, transforming abstract clusters into actionable insights.
 
-[Project Page ↗](/msc-project.html)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[GitHub ↗](https://github.com/hiteshtanejaa/MSc-Project/tree/main)
-
-***
-
-## Netflix Case Study
-<Image
-  src="/images/projects/netflix.jpg"
-  alt="Photo"
-  width={1000}
-  height={400}
-  priority
-  className="next-image"
+<ProjectCard
+  badge="AI · Production"
+  badgeType="ai"
+  title="RAG-Based Internal Knowledge System"
+  description="Architected the retrieval infrastructure for an internal Q&A tool at Accenture (NatWest Group). Built with Vector Databases to serve unstructured banking documents to an LLM, enabling staff to query institutional knowledge in natural language — deployed in a live banking environment."
+  stack={['Python', 'FastAPI', 'Vector DBs', 'LLMs', 'RAG', 'Embeddings', 'PostgreSQL']}
+  links={[]}
 />
-Analyzed over 8,800 data points from the Netflix catalog. I successfully identified key trends in viewership, leading to actionable insights on content strategy. My analysis revealed that adding TV Shows during July and December months could increase viewership by up to 15%. The study has equipped decision-makers with data-driven insights, ultimately contributing to a more effective content allocation strategy.
 
-[Case Study ↗ ](https://medium.com/@hiteshtaneja/data-exploration-and-visualisation-netflix-5e987bc6f150)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notebook.ipynb ↗ ](https://www.kaggle.com/code/hiteshtaneja/netflix-business-case-study)
+</div>
+</div>
 
-***
+<div className="projects-section">
+<div className="projects-section-label">
+  <span>Data Engineering & Analytics</span>
+</div>
 
-## Aerofit Case Study
-<Image
-  src="/images/projects/aerofit.jpg"
-  alt="Photo"
-  width={1000}
-  height={400}
-  priority
-  className="next-image"
+<div className="projects-grid">
+
+<ProjectCard
+  badge="Data · Case Study"
+  badgeType="data"
+  title="Netflix Content Strategy Analysis"
+  description="Deep dive into 8,800+ Netflix catalog data points to identify viewership trends and content strategy patterns. Revealed that adding TV Shows in July & December could increase viewership by up to 15%, providing data-driven insights for content allocation decisions."
+  stack={['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'EDA', 'Statistics']}
+  links={[
+    { label: 'Case Study', href: 'https://medium.com/@hiteshtaneja/data-exploration-and-visualisation-netflix-5e987bc6f150' },
+    { label: 'Notebook', href: 'https://www.kaggle.com/code/hiteshtaneja/netflix-business-case-study' }
+  ]}
 />
-My goal in this case study was to identify key characteristics that influence the purchase of specific treadmill models. Through techniques like outlier detection, correlation heatmaps, and probability calculations, I aim to provide actionable business insights. These insights will enable AeroFit to make data-driven recommendations to new customers, potentially increasing sales conversions by an estimated 10-15%.
 
-[Unavailable ↗ ](#)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notebook.ipynb ↗ ](https://www.kaggle.com/code/hiteshtaneja/aerofit-case-study)
-
----
-
-## Profit Analysis Dashboard
-<Image
-  src="/images/projects/profit-dashboard.png"
-  alt="Photo"
-  width={700}
-  height={400}
-  priority
-  className="next-image"
+<ProjectCard
+  badge="ML · Case Study"
+  badgeType="ml"
+  title="Aerofit Customer Intelligence"
+  description="Identified key customer characteristics influencing treadmill model purchases using outlier detection, correlation heatmaps, and probability analysis. Actionable insights enabling data-driven product recommendations — estimated 10–15% uplift in sales conversions."
+  stack={['Python', 'Pandas', 'Seaborn', 'Probability', 'Outlier Detection', 'EDA']}
+  links={[
+    { label: 'Notebook', href: 'https://www.kaggle.com/code/hiteshtaneja/aerofit-case-study' }
+  ]}
 />
-Interactive "Profit Analysis" dashboard, meticulously designed to offer in-depth insights into a superstore dataset. This intuitive Tableau dashboard provides a comprehensive overview of profit trends over various time frames and categories.
 
-[Dashboard ↗ ](https://public.tableau.com/app/profile/hitesh.taneja/viz/ProfitDashboardsuperstore_16835174249980/Dashboard1)
+<ProjectCard
+  badge="Data · Dashboard"
+  badgeType="data"
+  title="Profit Analysis Dashboard"
+  description="Interactive Tableau dashboard built on the Superstore dataset providing a comprehensive overview of profit trends across time frames, product categories, and geographies — designed for executive-level decision making."
+  stack={['Tableau', 'SQL', 'Data Visualization', 'Business Intelligence']}
+  links={[
+    { label: 'View Dashboard', href: 'https://public.tableau.com/app/profile/hitesh.taneja/viz/ProfitDashboardsuperstore_16835174249980/Dashboard1' }
+  ]}
+/>
 
+</div>
+</div>
 
+<div className="projects-section">
+<div className="projects-section-label">
+  <span>Currently Building</span>
+</div>
+
+<div className="projects-grid">
+
+<ProjectCard
+  badge="Building"
+  badgeType="build"
+  title="Your Next AI Project"
+  description="Add your current AI project here — describe what you're building, the problem it solves, and the tech stack. This card is a placeholder."
+  stack={['Python', 'LLMs', 'FastAPI', 'React']}
+  links={[]}
+/>
+
+<ProjectCard
+  badge="Building"
+  badgeType="build"
+  title="Your Second AI Project"
+  description="Got another project in the works? Swap this card out with details about what you're shipping next. RAG system, agent, data tool — anything goes."
+  stack={['Python', 'Vector DBs', 'Embeddings']}
+  links={[]}
+/>
+
+</div>
+</div>
+
+</div>

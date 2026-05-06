@@ -1,30 +1,28 @@
 const YEAR = new Date().getFullYear()
 
 export default {
-  // Add the banner configuration here
- // In theme.config.js
-  banner: {
-    key: 'announcement-1',
-    // Try using a simple string first to test
-    text: '🚀 Introducing the next big thing in AI! Check out my projects.',
-    dismissible: true,
-  },
+  darkMode: true,
 
-  // Your existing footer configuration
   footer: (
-    <small style={{ display: 'block', marginTop: '8rem' }}>
-      <time>{YEAR}</time> © Made with ❤️ Hitesh Taneja.
-      <style jsx>{`
-        a {
-          float: right;
-        }
-        @media screen and (max-width: 480px) {
-          article {
-            padding-top: 2rem;
-            padding-bottom: 4rem;
+    <footer style={{
+      borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+      padding: '32px 0 40px',
+      marginTop: '0',
+      textAlign: 'center',
+    }}>
+      <small style={{
+        color: '#475569',
+        fontSize: '0.8rem',
+        display: 'block',
+        letterSpacing: '0.02em',
+      }}>
+        <style jsx>{`
+          @media screen and (max-width: 480px) {
+            article { padding-top: 2rem; padding-bottom: 4rem; }
           }
-        }
-      `}</style>
-    </small>
+        `}</style>
+        {YEAR} © Hitesh Taneja — Built with purpose, powered by curiosity.
+      </small>
+    </footer>
   )
 }
