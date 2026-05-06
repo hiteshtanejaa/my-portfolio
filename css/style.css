@@ -376,7 +376,7 @@ body {
 #scroll-container {
   position: relative;
   height: 900vh;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 /* =============================================================
