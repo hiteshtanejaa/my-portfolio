@@ -376,7 +376,6 @@ body {
 #scroll-container {
   position: relative;
   height: 720vh;
-  z-index: 1;
 }
 
 /* =============================================================
@@ -477,7 +476,7 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #fff;
-  opacity: 0.5;
+  opacity: 1;
   margin-bottom: 8px;
 }
 
