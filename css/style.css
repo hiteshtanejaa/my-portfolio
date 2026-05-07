@@ -372,6 +372,8 @@ body {
 
 /* =============================================================
    SCROLL CONTAINER  (720vh)
+   No z-index here — avoids creating a stacking context that
+   would trap .section-stats below the dark overlay (z-index:3)
    ============================================================= */
 #scroll-container {
   position: relative;
@@ -475,8 +477,7 @@ body {
   font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #fff;
-  opacity: 1;
+  color: var(--cyan);
   margin-bottom: 8px;
 }
 
@@ -486,6 +487,7 @@ body {
   letter-spacing: 0.04em;
   color: #fff;
   line-height: 1;
+  text-shadow: 0 0 40px rgba(0,212,255,0.25);
 }
 
 .stats-grid {
@@ -513,8 +515,7 @@ body {
   font-size: 0.65rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #fff;
-  opacity: 0.5;
+  color: var(--cyan);
   margin-bottom: 10px;
 }
 
@@ -540,7 +541,6 @@ body {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 3.5vw, 4rem);
   color: #fff;
-  opacity: 0.7;
   line-height: 1.1;
   padding-top: 4px;
 }
@@ -549,7 +549,7 @@ body {
 .stat-label {
   font-size: 0.75rem;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.75);
   margin-top: 10px;
   max-width: 18ch;
   font-weight: 300;
