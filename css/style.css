@@ -381,17 +381,21 @@ body {
 }
 
 /* =============================================================
-   SCROLL SECTIONS  (absolute, side-aligned, hidden by default)
+   SCROLL SECTIONS
+   position: fixed  →  all sections live at the SAME viewport
+   position (center). Only JS visibility toggles what's seen.
+   This eliminates all physical overlap between sections.
    ============================================================= */
 .scroll-section {
-  position: absolute;
+  position: fixed;
+  top: 50vh;
+  left: 0;
   width: 100%;
   transform: translateY(-50%);
   visibility: hidden;
   pointer-events: none;
   padding-top: 4vh;
   padding-bottom: 4vh;
-  /* z-index: 2 keeps sections above canvas (z:0) but below dark overlay (z:3) */
   z-index: 2;
 }
 
@@ -403,16 +407,6 @@ body {
 
 .align-left  .section-inner,
 .align-right .section-inner { max-width: 40vw; }
-
-/* Absolute vertical positions = midpoint of data-enter/data-leave %
-   Matches index.html: enter 2,13,25,36,48,63,75 */
-[data-enter="2"]  { top: 7.5%;  }   /* (2+13)/2  */
-[data-enter="13"] { top: 19%;   }   /* (13+25)/2 */
-[data-enter="25"] { top: 30.5%; }   /* (25+36)/2 */
-[data-enter="36"] { top: 42%;   }   /* (36+48)/2 */
-[data-enter="48"] { top: 55.5%; }   /* (48+63)/2 */
-[data-enter="63"] { top: 69%;   }   /* (63+75)/2 */
-[data-enter="75"] { top: 87.5%; }   /* (75+100)/2 */
 
 /* =============================================================
    SECTION TYPOGRAPHY
