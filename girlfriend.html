@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0b0813" />
+  <title>Just for you 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --bg:          #0b0813;
+    --rose:        #ff6b9d;
+    --rose-light:  #ff8fab;
+    --rose-dim:    rgba(255,107,157,0.12);
+    --lavender:    #c9b1ff;
+    --gold:        #f5c6a0;
+    --text:        #fef0f5;
+    --text-dim:    rgba(254,240,245,0.58);
+    --text-ghost:  rgba(254,240,245,0.24);
+    --card:        rgba(255,255,255,0.04);
+    --card-border: rgba(255,107,157,0.18);
+    --font-d:      'Cormorant Garamond', Georgia, serif;
+    --font-b:      'Inter', -apple-system, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-b);
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+
+  /* ═══════════════════════════════
+     HEARTS CANVAS (always behind)
+  ═══════════════════════════════ */
+  #hearts-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════
+     LOCK SCREEN
+  ═══════════════════════════════ */
+  #lock-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: radial-gradient(ellipse at 50% 55%,
+      rgba(255,107,157,0.09) 0%, var(--bg) 68%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.9s ease, visibility 0.9s ease;
+  }
+  #lock-screen.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  .lock-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 32px;
+    gap: 0;
+  }
+
+  .lock-glow {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,157,0.18) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .lock-heart {
+    font-size: 4rem;
+    animation: heartbeat 1.8s ease-in-out infinite;
+    display: block;
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14%     { transform: scale(1.18); }
+    28%     { transform: scale(1); }
+    42%     { transform: scale(1.12); }
+    70%     { transform: scale(1); }
+  }
+
+  .lock-title {
+    font-family: var(--font-d);
+    font-size: clamp(2.2rem, 7vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .lock-sub {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 44px;
+  }
+  .lock-sub em {
+    color: var(--rose-light);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* PIN dots */
+  .pin-dots {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 18px;
+    cursor: text;
+    padding: 12px;
+  }
+  .dot {
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,107,157,0.35);
+    background: transparent;
+    transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  }
+  .dot.filled {
+    background: var(--rose);
+    border-color: var(--rose);
+    transform: scale(1.15);
+    box-shadow: 0 0 10px rgba(255,107,157,0.5);
+  }
+
+  /* Visually hidden but functional input */
+  #pin-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px; height: 1px;
+    pointer-events: none;
+    font-size: 16px; /* prevent iOS zoom */
+  }
+
+  .pin-error {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--rose-light);
+    min-height: 1.2em;
+    opacity: 0;
+    transition: opacity 0.2s;
+    margin-top: 4px;
+  }
+  .pin-error.show { opacity: 1; }
+
+  .pin-dots.shake { animation: pinShake 0.42s ease; }
+  @keyframes pinShake {
+    0%,100% { transform: translateX(0); }
+    20%     { transform: translateX(-9px); }
+    40%     { transform: translateX(9px); }
+    60%     { transform: translateX(-6px); }
+    80%     { transform: translateX(6px); }
+  }
+
+  /* ═══════════════════════════════
+     MAIN PAGE
+  ═══════════════════════════════ */
+  #main-page {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+  }
+  #main-page.visible   { opacity: 1; }
+  #main-page.off       { display: none; }
+
+  /* ── Nav ── */
+  .gf-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 14px 24px;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(11,8,19,0.85) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .gf-nav-brand {
+    font-family: var(--font-d);
+    font-size: 1rem;
+    letter-spacing: 0.16em;
+    color: var(--rose-light);
+    opacity: 0.85;
+  }
+
+  /* ── Hero ── */
+  .gf-hero {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 28px 70px;
+    position: relative;
+  }
+
+  .gf-met {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    opacity: 0.6;
+    margin-bottom: 18px;
+  }
+
+  .gf-name {
+    font-family: var(--font-d);
+    font-size: clamp(5.5rem, 22vw, 13rem);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    font-style: italic;
+    margin-bottom: 36px;
+    background: linear-gradient(135deg, #fef0f5 20%, var(--rose) 60%, var(--lavender) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Days counter */
+  .gf-counter {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 20px 40px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(8px);
+  }
+  .gf-counter-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .gf-counter-num {
+    font-family: var(--font-d);
+    font-size: clamp(2.8rem, 10vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--rose), var(--lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gf-counter-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-ghost);
+    margin-top: 4px;
+  }
+
+  .gf-tagline {
+    font-family: var(--font-d);
+    font-size: clamp(1.1rem, 4vw, 1.55rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.75;
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+
+  .gf-scroll-hint {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-ghost);
+    animation: scrollBounce 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%,100% { transform: translateY(0); opacity: 0.5; }
+    50%     { transform: translateY(7px); opacity: 0.9; }
+  }
+
+  /* ── Section heading ── */
+  .section-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .section-eyebrow {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: var(--font-d);
+    font-size: clamp(2rem, 7vw, 3.8rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+
+  /* ── Photos section ── */
+  .gf-photos {
+    padding: 80px 16px 60px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (min-width: 640px)  { .photos-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+  @media (min-width: 960px)  { .photos-grid { grid-template-columns: repeat(4, 1fr); gap: 22px; } }
+
+  /* Polaroid card */
+  .polaroid {
+    background: #fdf7f2;
+    padding: 10px 10px 34px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.3);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.35s ease, box-shadow 0.35s ease, z-index 0s;
+    cursor: pointer;
+    position: relative;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: rotate(var(--rot,0deg)) translateY(18px); }
+    to   { opacity: 1; transform: rotate(var(--rot,0deg)) translateY(0);    }
+  }
+  .polaroid:hover, .polaroid:active {
+    transform: rotate(0deg) scale(1.04) translateY(-5px);
+    box-shadow: 0 18px 50px rgba(255,107,157,0.3), 0 8px 18px rgba(0,0,0,0.4);
+    z-index: 10;
+  }
+  .polaroid-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #eadfd8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .polaroid-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.4s ease;
+  }
+  .polaroid-caption {
+    font-family: var(--font-d);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #6b4c52;
+    text-align: center;
+    padding-top: 8px;
+    line-height: 1.3;
+  }
+
+  /* Placeholder / emoji polaroid */
+  .polaroid-ph .polaroid-img {
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #fde8f0, #ead8f5);
+  }
+
+  /* Loading state */
+  .photos-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 64px 20px;
+    color: var(--text-dim);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .loading-spin {
+    font-size: 1.8rem;
+    animation: spin 1.8s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    font-size: 1.8rem;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    line-height: 1;
+    padding: 8px;
+  }
+
+  /* ── Love note ── */
+  .gf-note {
+    padding: 40px 20px 80px;
+    display: flex;
+    justify-content: center;
+  }
+  .note-card {
+    max-width: 580px;
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 22px;
+    padding: 44px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .note-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,107,157,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .note-rose { font-size: 2.6rem; display: block; margin-bottom: 24px; }
+  .note-text {
+    font-family: var(--font-d);
+    font-size: clamp(1.1rem, 3.8vw, 1.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .note-sig {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    color: var(--rose);
+    opacity: 0.75;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Footer ── */
+  .gf-footer {
+    text-align: center;
+    padding: 28px 24px 40px;
+    border-top: 1px solid rgba(255,107,157,0.08);
+  }
+  .gf-footer p {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-ghost);
+  }
+
+  /* ── Mobile touch polish ── */
+  @media (max-width: 480px) {
+    .gf-note .note-card { padding: 28px 20px; }
+    .gf-photos { padding: 60px 10px 50px; }
+    .photos-grid { gap: 10px; }
+    .polaroid { padding: 8px 8px 28px; }
+    .polaroid-caption { font-size: 0.72rem; }
+    .gf-counter { padding: 16px 28px; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<canvas id="hearts-canvas"></canvas>
+
+<!-- ══════════ LOCK SCREEN ══════════ -->
+<div id="lock-screen">
+  <div class="lock-wrap">
+    <div class="lock-glow">
+      <span class="lock-heart">💕</span>
+    </div>
+    <h1 class="lock-title">Just for you</h1>
+    <p class="lock-sub">Enter your code, <em>Shivangi</em></p>
+    <div class="pin-dots" id="pin-dots">
+      <span class="dot" id="d0"></span>
+      <span class="dot" id="d1"></span>
+      <span class="dot" id="d2"></span>
+      <span class="dot" id="d3"></span>
+    </div>
+    <input type="tel" id="pin-input" inputmode="numeric"
+           pattern="[0-9]*" maxlength="4" autocomplete="off"
+           aria-label="Enter passcode" />
+    <p class="pin-error" id="pin-error">Try again 💕</p>
+  </div>
+</div>
+
+<!-- ══════════ MAIN PAGE ══════════ -->
+<div id="main-page" class="off">
+
+  <nav class="gf-nav">
+    <span class="gf-nav-brand">H &amp; S &nbsp;💕</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="gf-hero">
+    <p class="gf-met">Together since 28 August 2025</p>
+    <h1 class="gf-name">Shivangi</h1>
+    <div class="gf-counter">
+      <div class="gf-counter-row">
+        <span class="gf-counter-num" id="days-num">0</span>
+      </div>
+      <span class="gf-counter-label">days of us ✨</span>
+    </div>
+    <p class="gf-tagline">
+      "Every moment with you is my favourite moment."
+    </p>
+    <div class="gf-scroll-hint">scroll ↓</div>
+  </section>
+
+  <!-- Photos -->
+  <section class="gf-photos">
+    <div class="section-head">
+      <span class="section-eyebrow">little pieces of us</span>
+      <h2 class="section-title">Our Moments</h2>
+    </div>
+    <div class="photos-grid" id="photos-grid">
+      <div class="photos-loading" id="photos-loading">
+        <span>Loading your memories</span>
+        <span class="loading-spin">💕</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Love Note -->
+  <section class="gf-note">
+    <div class="note-card">
+      <span class="note-rose">🌹</span>
+      <p class="note-text">
+        "To the person who turned ordinary days into something beautiful —
+        thank you for your smile, your warmth, and for choosing to be with me.
+        You are my favourite notification, my favourite conversation,
+        and my favourite person.
+        I love you, always."
+      </p>
+      <p class="note-sig">— Hitesh &nbsp;💕</p>
+    </div>
+  </section>
+
+  <footer class="gf-footer">
+    <p>made with ♥ by Hitesh, just for Shivangi</p>
+  </footer>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <span id="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script>
+/* ═══════════════════════════════════
+   CONFIG
+═══════════════════════════════════ */
+const START_DATE = new Date('2025-08-28');
+const PASSCODE   = atob('MDkxMg=='); // = '0912'
+
+/* ═══════════════════════════════════
+   FLOATING HEARTS CANVAS
+═══════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('hearts-canvas');
+  const ctx    = canvas.getContext('2d');
+  let hearts   = [];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function newHeart() {
+    return {
+      x:       Math.random() * canvas.width,
+      y:       canvas.height + 20,
+      size:    Math.random() * 11 + 5,
+      speed:   Math.random() * 1.1 + 0.35,
+      drift:   (Math.random() - 0.5) * 0.55,
+      alpha:   Math.random() * 0.22 + 0.04,
+      rot:     Math.random() * Math.PI * 2,
+      rotSpd:  (Math.random() - 0.5) * 0.022,
+    };
+  }
+
+  function drawHeart(h) {
+    ctx.save();
+    ctx.translate(h.x, h.y);
+    ctx.rotate(h.rot);
+    ctx.globalAlpha = h.alpha;
+    ctx.font = `${h.size * 2}px serif`;
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('♥', 0, 0);
+    ctx.restore();
+  }
+
+  setInterval(() => { if (hearts.length < 20) hearts.push(newHeart()); }, 1000);
+
+  (function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hearts = hearts.filter(h => {
+      h.y   -= h.speed;
+      h.x   += h.drift;
+      h.rot += h.rotSpd;
+      drawHeart(h);
+      return h.y > -40;
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ═══════════════════════════════════
+   LOCK SCREEN
+═══════════════════════════════════ */
+(function () {
+  const lock    = document.getElementById('lock-screen');
+  const main    = document.getElementById('main-page');
+  const input   = document.getElementById('pin-input');
+  const dots    = document.getElementById('pin-dots');
+  const dotEls  = [0,1,2,3].map(i => document.getElementById('d' + i));
+  const errEl   = document.getElementById('pin-error');
+
+  function revealMain(animate) {
+    main.classList.remove('off');
+    if (animate) {
+      setTimeout(() => main.classList.add('visible'), 60);
+    } else {
+      main.classList.add('visible');
+    }
+    initCounter();
+    loadPhotos();
+  }
+
+  /* Already unlocked this session? Skip lock screen */
+  if (sessionStorage.getItem('gf_ok') === '1') {
+    lock.style.display = 'none';
+    revealMain(false);
+    return;
+  }
+
+  /* Auto-focus */
+  function focusInput() { input.focus({ preventScroll: true }); }
+  setTimeout(focusInput, 300);
+  lock.addEventListener('click', focusInput);
+
+  input.addEventListener('input', function () {
+    const val = this.value.replace(/\D/g, '').slice(0, 4);
+    this.value = val;
+    dotEls.forEach((d, i) => d.classList.toggle('filled', i < val.length));
+
+    if (val.length === 4) {
+      if (val === PASSCODE) {
+        sessionStorage.setItem('gf_ok', '1');
+        lock.classList.add('fade-out');
+        setTimeout(() => {
+          lock.style.display = 'none';
+          revealMain(true);
+        }, 900);
+      } else {
+        dots.classList.add('shake');
+        errEl.classList.add('show');
+        navigator.vibrate && navigator.vibrate([60, 30, 60]);
+        setTimeout(() => {
+          dots.classList.remove('shake');
+          errEl.classList.remove('show');
+          this.value = '';
+          dotEls.forEach(d => d.classList.remove('filled'));
+          focusInput();
+        }, 720);
+      }
+    }
+  });
+})();
+
+/* ═══════════════════════════════════
+   DAYS COUNTER
+═══════════════════════════════════ */
+function initCounter() {
+  const el   = document.getElementById('days-num');
+  const days = Math.floor((Date.now() - START_DATE.getTime()) / 86400000);
+
+  let cur = 0;
+  const step = Math.max(1, Math.floor(days / 55));
+  const t = setInterval(() => {
+    cur = Math.min(cur + step, days);
+    el.textContent = cur.toLocaleString();
+    if (cur >= days) clearInterval(t);
+  }, 18);
+}
+
+/* ═══════════════════════════════════
+   iCLOUD PHOTOS
+═══════════════════════════════════ */
+async function loadPhotos() {
+  const grid    = document.getElementById('photos-grid');
+  const loading = document.getElementById('photos-loading');
+
+  try {
+    const res  = await fetch('/api/photos');
+    const data = await res.json();
+
+    if (!data.photos?.length) {
+      loading.remove();
+      showPlaceholders(grid);
+      return;
+    }
+
+    loading.remove();
+    data.photos.forEach((photo, i) => {
+      const rots = [-3.2, -1.5, 0, 1.5, 3.0, -2.2, 2.5, -0.8];
+      const rot  = rots[i % rots.length] + (Math.random() - 0.5) * 0.6;
+      const card = makePolaroid(photo.url, photo.caption || '♥', rot, i);
+      grid.appendChild(card);
+    });
+
+  } catch (e) {
+    loading.remove();
+    showPlaceholders(grid);
+  }
+}
+
+function makePolaroid(src, caption, rot, idx) {
+  const div = document.createElement('div');
+  div.className = 'polaroid';
+  div.style.setProperty('--rot', rot.toFixed(1) + 'deg');
+  div.style.animationDelay = (idx * 0.07) + 's';
+  div.innerHTML = `
+    <div class="polaroid-img">
+      <img src="${escapeHtml(src)}" alt="${escapeHtml(caption)}" loading="lazy">
+    </div>
+    <div class="polaroid-caption">${escapeHtml(caption)}</div>
+  `;
+  /* Lightbox on click */
+  div.addEventListener('click', () => openLightbox(src, caption));
+  return div;
+}
+
+function showPlaceholders(grid) {
+  const items = [
+    { e: '🌸', c: 'us' }, { e: '💕', c: 'always' },
+    { e: '✨', c: 'forever' }, { e: '🌹', c: 'our story' },
+    { e: '💝', c: '♥' }, { e: '🌷', c: 'together' },
+    { e: '💖', c: 'love' }, { e: '🫶', c: 'happiness' },
+  ];
+  const rots = [-3, 1.5, -1, 2.5, -2.5, 1, -0.5, 3];
+  items.forEach(({ e, c }, i) => {
+    const div = document.createElement('div');
+    div.className = 'polaroid polaroid-ph';
+    div.style.setProperty('--rot', rots[i] + 'deg');
+    div.style.animationDelay = (i * 0.07) + 's';
+    div.innerHTML = `
+      <div class="polaroid-img">${e}</div>
+      <div class="polaroid-caption">${c}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                  .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═══════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════ */
+function openLightbox(src, alt) {
+  const lb  = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  img.alt = alt;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

@@ -2,5 +2,8 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "installCommand": null
+  "installCommand": null,
+  "rewrites": [
+    { "source": "/girlfriend", "destination": "/girlfriend.html" }
+  ]
 }
