@@ -374,18 +374,6 @@
     object-fit: cover;
     display: block;
   }
-  .video-play-badge {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    color: rgba(255,255,255,0.9);
-    background: rgba(0,0,0,0.25);
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-  }
   .polaroid-caption {
     font-family: var(--font-d);
     font-size: 0.8rem;
@@ -961,23 +949,10 @@ function makeVideoPolaroid(src, poster, caption, rot, idx) {
     <div class="polaroid-img polaroid-img-video">
       <video src="${escapeHtml(src)}"
              ${poster ? `poster="${escapeHtml(poster)}"` : ''}
-             muted playsinline loop preload="none"></video>
-      <span class="video-play-badge">▶</span>
+             autoplay muted playsinline loop></video>
     </div>
     <div class="polaroid-caption">${escapeHtml(caption)}</div>
   `;
-  /* tap/click: play inline on mobile, open lightbox-style on desktop */
-  const video = div.querySelector('video');
-  const badge = div.querySelector('.video-play-badge');
-  div.addEventListener('click', () => {
-    if (video.paused) {
-      video.play();
-      badge.style.opacity = '0';
-    } else {
-      video.pause();
-      badge.style.opacity = '1';
-    }
-  });
   return div;
 }
 
