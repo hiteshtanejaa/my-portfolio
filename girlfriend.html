@@ -754,7 +754,6 @@
    CONFIG
 ═══════════════════════════════════ */
 const START_DATE = new Date('2025-08-28');
-const PASSCODE   = atob('MDkxMg=='); // = '0912'
 
 /* ═══════════════════════════════════
    FLOATING HEARTS CANVAS
@@ -834,7 +833,8 @@ const PASSCODE   = atob('MDkxMg=='); // = '0912'
   }
 
   /* Already unlocked this session? Skip lock screen */
-  if (sessionStorage.getItem('gf_ok') === '1') {
+  const savedToken = sessionStorage.getItem('gf_token');
+  if (savedToken) {
     lock.style.display = 'none';
     revealMain(false);
     return;
@@ -845,20 +845,31 @@ const PASSCODE   = atob('MDkxMg=='); // = '0912'
   setTimeout(focusInput, 300);
   lock.addEventListener('click', focusInput);
 
-  input.addEventListener('input', function () {
+  input.addEventListener('input', async function () {
     const val = this.value.replace(/\D/g, '').slice(0, 4);
     this.value = val;
     dotEls.forEach((d, i) => d.classList.toggle('filled', i < val.length));
 
     if (val.length === 4) {
-      if (val === PASSCODE) {
-        sessionStorage.setItem('gf_ok', '1');
-        lock.classList.add('fade-out');
-        setTimeout(() => {
-          lock.style.display = 'none';
-          revealMain(true);
-        }, 900);
-      } else {
+      try {
+        const res  = await fetch('/api/unlock', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ pin: val }),
+        });
+        const data = await res.json();
+
+        if (data.ok && data.token) {
+          sessionStorage.setItem('gf_token', data.token);
+          lock.classList.add('fade-out');
+          setTimeout(() => {
+            lock.style.display = 'none';
+            revealMain(true);
+          }, 900);
+        } else {
+          throw new Error('wrong pin');
+        }
+      } catch (_) {
         dots.classList.add('shake');
         errEl.classList.add('show');
         navigator.vibrate && navigator.vibrate([60, 30, 60]);
@@ -898,7 +909,10 @@ async function loadPhotos() {
   const loading = document.getElementById('photos-loading');
 
   try {
-    const res  = await fetch('/api/photos');
+    const gfToken = sessionStorage.getItem('gf_token') || '';
+    const res  = await fetch('/api/photos', {
+      headers: { 'X-GF-Token': gfToken },
+    });
     const data = await res.json();
 
     if (!data.photos?.length) {

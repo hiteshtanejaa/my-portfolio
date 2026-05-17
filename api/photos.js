@@ -1,16 +1,36 @@
 /**
- * /api/photos — iCloud Shared Album proxy
+ * /api/photos — iCloud Shared Album proxy (protected)
  *
- * Set ICLOUD_ALBUM_TOKEN in Vercel Environment Variables
- * (Dashboard → Project → Settings → Environment Variables)
+ * Requires a valid token from /api/unlock in the
+ * X-GF-Token request header. Returns 401 otherwise.
  *
- * Token comes from the hash fragment of the iCloud album URL:
- * https://www.icloud.com/sharedalbum/#TOKEN_HERE
+ * Vercel env vars:
+ *   ICLOUD_ALBUM_TOKEN — hash from iCloud shared album URL
+ *   GF_SECRET          — same secret used in /api/unlock
  */
+
+const crypto = require('crypto');
+
+function verifyToken(raw, secret) {
+  if (!raw || !secret) return false;
+  const [expires, sig] = raw.split('.');
+  if (!expires || !sig) return false;
+  if (Date.now() > parseInt(expires, 10)) return false;
+  const expected = crypto.createHmac('sha256', secret).update(expires).digest('hex');
+  return sig === expected;
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-GF-Token');
   res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
+
+  /* ── Auth check ── */
+  const gfSecret = process.env.GF_SECRET;
+  const gfToken  = req.headers['x-gf-token'];
+  if (!verifyToken(gfToken, gfSecret)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
 
   const token = process.env.ICLOUD_ALBUM_TOKEN;
   if (!token) {
