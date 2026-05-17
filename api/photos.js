@@ -10,7 +10,7 @@
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
 
   const token = process.env.ICLOUD_ALBUM_TOKEN;
   if (!token) {
@@ -28,7 +28,6 @@ module.exports = async function handler(req, res) {
   };
 
   let host = 'p23-sharedstreams.icloud.com';
-  const _log = [];
 
   try {
     /* ── Step 1: fetch stream metadata ── */
@@ -36,38 +35,23 @@ module.exports = async function handler(req, res) {
       `https://${host}/${token}/sharedstreams/webstream`,
       { method: 'POST', headers: baseHeaders, body: JSON.stringify({ streamCtag: null }) }
     );
-    _log.push(`step1 status=${streamRes.status} host=${host}`);
 
     /* Handle redirect to region-specific host (iCloud uses 330 or 421) */
     if (streamRes.status === 330 || streamRes.status === 421) {
       const redir = await streamRes.json();
       const newHost = redir['X-Apple-MMe-Host'] || redir['X_Apple_MMe_Host'];
-      _log.push(`redirect body keys=${Object.keys(redir).join(',')}, newHost=${newHost}`);
       if (newHost) {
         host = newHost;
         streamRes = await fetch(
           `https://${host}/${token}/sharedstreams/webstream`,
           { method: 'POST', headers: baseHeaders, body: JSON.stringify({ streamCtag: null }) }
         );
-        _log.push(`step1b status=${streamRes.status} host=${host}`);
       }
     }
 
-    const streamText = await streamRes.text();
-    _log.push(`stream body preview=${streamText.slice(0, 300)}`);
-
-    let stream;
-    try { stream = JSON.parse(streamText); }
-    catch(e) { return res.json({ photos: [], _log, _error: 'stream JSON parse failed', _raw: streamText.slice(0,500) }); }
-
+    const stream = await streamRes.json();
     const photos = stream.photos || [];
-    _log.push(`photos count=${photos.length}, stream keys=${Object.keys(stream).join(',')}`);
-
-    if (!photos.length) return res.json({
-      photos: [],
-      total: 0,
-      _log,
-    });
+    if (!photos.length) return res.json({ photos: [], total: 0 });
 
     const guids = photos.map(p => p.photoGuid);
 
@@ -76,25 +60,24 @@ module.exports = async function handler(req, res) {
       `https://${host}/${token}/sharedstreams/webasseturls`,
       { method: 'POST', headers: baseHeaders, body: JSON.stringify({ photoGuids: guids }) }
     );
-    _log.push(`step2 status=${urlRes.status}`);
     const urlData = await urlRes.json();
-    _log.push(`urlData keys=${Object.keys(urlData).join(',')}, items count=${Object.keys(urlData.items||{}).length}`);
-
     const locations = urlData.locations || {};
 
-    /* Debug: inspect first item in urlData.items to understand shape */
-    const firstItemKey  = Object.keys(urlData.items || {})[0];
-    const firstItem     = firstItemKey ? urlData.items[firstItemKey] : null;
-    const firstLocKey   = Object.keys(locations)[0];
-    const firstLoc      = firstLocKey ? locations[firstLocKey] : null;
-    _log.push(`first guid=${guids[0]}, firstItemKey=${firstItemKey}, match=${guids[0]===firstItemKey}`);
-    _log.push(`firstItem=${JSON.stringify(firstItem)}`);
-    _log.push(`firstLoc=${JSON.stringify(firstLoc)}`);
-
+    /* ── Step 3: assemble photo list ── */
+    /*
+     * webasseturls items are keyed by derivative CHECKSUM (not photoGuid).
+     * URL = scheme + "://" + locations[url_location].hosts[0] + url_path
+     */
     const result = photos
       .map(photo => {
-        const guid    = photo.photoGuid;
-        const urlInfo = urlData.items?.[guid];
+        const guid   = photo.photoGuid;
+        const derivs = photo.derivatives || {};
+        const best   = derivs['2048x2048'] || derivs['1600x1600']
+                    || derivs['1024x1024'] || derivs['640x640']
+                    || Object.values(derivs)[0];
+
+        if (!best?.checksum) return null;
+        const urlInfo = urlData.items?.[best.checksum];
         if (!urlInfo) return null;
 
         const locKey  = urlInfo.url_location;
@@ -106,27 +89,22 @@ module.exports = async function handler(req, res) {
         if (!urlHost || !path) return null;
         const url = `${scheme}://${urlHost}${path}`;
 
-        const derivs = photo.derivatives || {};
-        const best   = derivs['2048x2048'] || derivs['1600x1600']
-                    || derivs['1024x1024'] || derivs['640x640']
-                    || Object.values(derivs)[0];
-
         return {
           guid,
           url,
           caption: photo.caption || '',
-          width:   best?.width  || 800,
-          height:  best?.height || 800,
+          width:   best.width  || 800,
+          height:  best.height || 800,
           date:    photo.dateCreated || '',
         };
       })
       .filter(Boolean)
-      .reverse();
+      .reverse(); // newest first
 
-    if (!result.length) return res.json({ photos: [], total: 0, _log });
     return res.json({ photos: result, total: result.length });
 
   } catch (err) {
-    return res.status(200).json({ photos: [], _log, error: err.message });
+    console.error('[iCloud proxy error]', err.message);
+    return res.status(200).json({ photos: [], error: err.message });
   }
 };
