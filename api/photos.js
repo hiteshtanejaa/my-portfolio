@@ -51,7 +51,7 @@ module.exports = async function handler(req, res) {
 
     const stream = await streamRes.json();
     const photos = stream.photos || [];
-    if (!photos.length) return res.json({ photos: [], total: 0 });
+    if (!photos.length) return res.json({ photos: [], total: 0, _debug: 'no photos in stream' });
 
     const guids = photos.map(p => p.photoGuid);
 
@@ -63,21 +63,52 @@ module.exports = async function handler(req, res) {
     const urlData = await urlRes.json();
 
     /* ── Step 3: assemble photo list ── */
+    /*
+     * iCloud webasseturls response shape:
+     * {
+     *   "items": {
+     *     "<photoGuid>": {
+     *       "url_location": "pXX-sharedstreams.icloud.com",   ← location KEY, not a URL
+     *       "url_path":     "/TOKEN/sharedstreams/GUID/...",
+     *       "url_expiry":   "..."
+     *     }
+     *   },
+     *   "locations": {
+     *     "pXX-sharedstreams.icloud.com": {
+     *       "scheme": "https",
+     *       "hosts":  ["pXX-sharedstreams.icloud.com"]
+     *     }
+     *   }
+     * }
+     * The full URL = scheme + "://" + hosts[0] + url_path
+     */
+    const locations = urlData.locations || {};
+
     const result = photos
       .map(photo => {
         const guid    = photo.photoGuid;
         const urlInfo = urlData.items?.[guid];
-        if (!urlInfo?.url_location) return null;
+        if (!urlInfo) return null;
+
+        /* Build the actual signed URL */
+        const locKey  = urlInfo.url_location;
+        const locObj  = locations[locKey] || {};
+        const scheme  = locObj.scheme || 'https';
+        const urlHost = (locObj.hosts && locObj.hosts[0]) || locKey;
+        const path    = urlInfo.url_path || '';
+
+        if (!urlHost || !path) return null;
+        const url = `${scheme}://${urlHost}${path}`;
 
         /* Prefer highest available resolution */
-        const derivs  = photo.derivatives || {};
-        const best    = derivs['2048x2048'] || derivs['1600x1600']
-                     || derivs['1024x1024'] || derivs['640x640']
-                     || Object.values(derivs)[0];
+        const derivs = photo.derivatives || {};
+        const best   = derivs['2048x2048'] || derivs['1600x1600']
+                    || derivs['1024x1024'] || derivs['640x640']
+                    || Object.values(derivs)[0];
 
         return {
           guid,
-          url:     urlInfo.url_location,
+          url,
           caption: photo.caption || '',
           width:   best?.width  || 800,
           height:  best?.height || 800,
