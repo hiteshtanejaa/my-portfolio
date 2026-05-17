@@ -36,8 +36,8 @@ module.exports = async function handler(req, res) {
       { method: 'POST', headers: baseHeaders, body: JSON.stringify({ streamCtag: null }) }
     );
 
-    /* Handle 421 redirect to region-specific host */
-    if (streamRes.status === 421) {
+    /* Handle redirect to region-specific host (iCloud uses 330 or 421) */
+    if (streamRes.status === 330 || streamRes.status === 421) {
       const redir = await streamRes.json();
       const newHost = redir['X-Apple-MMe-Host'] || redir['X_Apple_MMe_Host'];
       if (newHost) {
