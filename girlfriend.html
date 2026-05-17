@@ -472,6 +472,92 @@
     z-index: 1;
   }
 
+  /* ── H&D Story ── */
+  .gf-story {
+    padding: 80px 24px 70px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .gf-story .section-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .story-hashtag {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .story-title {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(2rem, 7vw, 3.2rem);
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+  }
+  .story-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .story-chapter {
+    display: flex;
+    gap: 24px;
+    padding: 0 0 40px 0;
+    position: relative;
+  }
+  .story-chapter:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 36px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(255,107,157,0.3), transparent);
+  }
+  .story-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,107,157,0.12);
+    border: 1px solid rgba(255,107,157,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-top: 2px;
+  }
+  .story-content {}
+  .story-content h4 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin: 0 0 6px;
+  }
+  .story-content p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--text-ghost);
+    margin: 0;
+  }
+  .story-content .story-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,107,157,0.5);
+    margin-bottom: 6px;
+    display: block;
+  }
+  @media (max-width: 480px) {
+    .gf-story { padding: 60px 20px 50px; }
+  }
+
   /* ── Footer ── */
   .gf-footer {
     text-align: center;
@@ -555,6 +641,62 @@
         <span>Loading your memories</span>
         <span class="loading-spin">💕</span>
       </div>
+    </div>
+  </section>
+
+  <!-- H&D Story -->
+  <section class="gf-story" id="theHDstory">
+    <div class="section-head">
+      <span class="story-hashtag">#theHDstory</span>
+      <h2 class="story-title">How It All Began</h2>
+    </div>
+    <div class="story-body">
+
+      <div class="story-chapter">
+        <div class="story-icon">🎓</div>
+        <div class="story-content">
+          <span class="story-date">2024 — London</span>
+          <h4>Same University, Different Worlds</h4>
+          <p>Two people who had no idea they'd end up meaning everything to each other — both landed at the University of Greenwich, London. Different backgrounds, same city, same building. That's where the story starts.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-icon">👀</div>
+        <div class="story-content">
+          <span class="story-date">The beginning</span>
+          <h4>The First Hello</h4>
+          <p>There's always that moment — that first conversation that feels a little different from the rest. With Disha, it didn't take long to realise she wasn't just someone you'd forget. She was the kind of person who stays.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-icon">🌆</div>
+        <div class="story-content">
+          <span class="story-date">London days</span>
+          <h4>The City Was Ours</h4>
+          <p>Late evenings, long walks, corner cafés, and the kind of conversations that make London feel like a small town. Every place we visited quietly became a part of our story without us even trying.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-icon">💕</div>
+        <div class="story-content">
+          <span class="story-date">28 August 2025</span>
+          <h4>Us, Official</h4>
+          <p>The day it became something real — something with a name. The day I got to call you mine, and you got to call me yours. Turns out the best things don't need to be planned. They just happen, and then you wonder how you ever got along without them.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-icon">✨</div>
+        <div class="story-content">
+          <span class="story-date">Every day since</span>
+          <h4>Still Writing It</h4>
+          <p>This page exists because you deserve to know — you are not just a part of my life, you are one of my favourite parts. Every day with you adds another line to this story, and I can't wait to see where it goes. Here's to all the chapters still ahead, Disha.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
