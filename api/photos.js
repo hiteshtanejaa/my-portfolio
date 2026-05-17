@@ -70,11 +70,14 @@ module.exports = async function handler(req, res) {
      */
     const result = photos
       .map(photo => {
-        const guid   = photo.photoGuid;
-        const derivs = photo.derivatives || {};
-        const best   = derivs['2048x2048'] || derivs['1600x1600']
-                    || derivs['1024x1024'] || derivs['640x640']
-                    || Object.values(derivs)[0];
+        const guid    = photo.photoGuid;
+        const isVideo = photo.mediaAssetType === 'video';
+        const derivs  = photo.derivatives || {};
+
+        /* For videos prefer the original/highest; for photos prefer highest resolution */
+        const best = isVideo
+          ? (derivs['original'] || derivs['video_small'] || Object.values(derivs)[0])
+          : (derivs['2048x2048'] || derivs['1600x1600'] || derivs['1024x1024'] || derivs['640x640'] || Object.values(derivs)[0]);
 
         if (!best?.checksum) return null;
         const urlInfo = urlData.items?.[best.checksum];
@@ -89,9 +92,26 @@ module.exports = async function handler(req, res) {
         if (!urlHost || !path) return null;
         const url = `${scheme}://${urlHost}${path}`;
 
+        /* For videos also grab a poster thumbnail from a photo-like derivative */
+        let poster = null;
+        if (isVideo) {
+          const thumbDeriv = derivs['2048x2048'] || derivs['1600x1600'] || derivs['1024x1024'] || derivs['640x640'];
+          if (thumbDeriv?.checksum) {
+            const thumbInfo = urlData.items?.[thumbDeriv.checksum];
+            if (thumbInfo) {
+              const tLocObj = locations[thumbInfo.url_location] || {};
+              const tHost   = (tLocObj.hosts && tLocObj.hosts[0]) || thumbInfo.url_location;
+              const tPath   = thumbInfo.url_path || '';
+              if (tHost && tPath) poster = `${tLocObj.scheme || 'https'}://${tHost}${tPath}`;
+            }
+          }
+        }
+
         return {
           guid,
+          type:    isVideo ? 'video' : 'photo',
           url,
+          poster:  poster || '',
           caption: photo.caption || '',
           width:   best.width  || 800,
           height:  best.height || 800,

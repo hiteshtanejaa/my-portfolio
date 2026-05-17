@@ -364,6 +364,28 @@
     display: block;
     transition: opacity 0.4s ease;
   }
+  /* ── Video polaroid ── */
+  .polaroid-img-video {
+    position: relative;
+  }
+  .polaroid-img-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video-play-badge {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.25);
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
   .polaroid-caption {
     font-family: var(--font-d);
     font-size: 0.8rem;
@@ -889,7 +911,9 @@ async function loadPhotos() {
     data.photos.forEach((photo, i) => {
       const rots = [-3.2, -1.5, 0, 1.5, 3.0, -2.2, 2.5, -0.8];
       const rot  = rots[i % rots.length] + (Math.random() - 0.5) * 0.6;
-      const card = makePolaroid(photo.url, photo.caption || '♥', rot, i);
+      const card = photo.type === 'video'
+        ? makeVideoPolaroid(photo.url, photo.poster, photo.caption || '♥', rot, i)
+        : makePolaroid(photo.url, photo.caption || '♥', rot, i);
       grid.appendChild(card);
     });
 
@@ -910,8 +934,36 @@ function makePolaroid(src, caption, rot, idx) {
     </div>
     <div class="polaroid-caption">${escapeHtml(caption)}</div>
   `;
-  /* Lightbox on click */
   div.addEventListener('click', () => openLightbox(src, caption));
+  return div;
+}
+
+function makeVideoPolaroid(src, poster, caption, rot, idx) {
+  const div = document.createElement('div');
+  div.className = 'polaroid polaroid-video';
+  div.style.setProperty('--rot', rot.toFixed(1) + 'deg');
+  div.style.animationDelay = (idx * 0.07) + 's';
+  div.innerHTML = `
+    <div class="polaroid-img polaroid-img-video">
+      <video src="${escapeHtml(src)}"
+             ${poster ? `poster="${escapeHtml(poster)}"` : ''}
+             muted playsinline loop preload="none"></video>
+      <span class="video-play-badge">▶</span>
+    </div>
+    <div class="polaroid-caption">${escapeHtml(caption)}</div>
+  `;
+  /* tap/click: play inline on mobile, open lightbox-style on desktop */
+  const video = div.querySelector('video');
+  const badge = div.querySelector('.video-play-badge');
+  div.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      badge.style.opacity = '0';
+    } else {
+      video.pause();
+      badge.style.opacity = '1';
+    }
+  });
   return div;
 }
 
