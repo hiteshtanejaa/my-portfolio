@@ -51,7 +51,14 @@ module.exports = async function handler(req, res) {
 
     const stream = await streamRes.json();
     const photos = stream.photos || [];
-    if (!photos.length) return res.json({ photos: [], total: 0, _debug: 'no photos in stream' });
+    if (!photos.length) return res.json({
+      photos: [],
+      total: 0,
+      _debug: 'no photos in stream',
+      _streamKeys: Object.keys(stream),
+      _streamStatus: streamRes.status,
+      _host: host,
+    });
 
     const guids = photos.map(p => p.photoGuid);
 
