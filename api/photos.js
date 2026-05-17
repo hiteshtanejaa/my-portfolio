@@ -82,6 +82,15 @@ module.exports = async function handler(req, res) {
 
     const locations = urlData.locations || {};
 
+    /* Debug: inspect first item in urlData.items to understand shape */
+    const firstItemKey  = Object.keys(urlData.items || {})[0];
+    const firstItem     = firstItemKey ? urlData.items[firstItemKey] : null;
+    const firstLocKey   = Object.keys(locations)[0];
+    const firstLoc      = firstLocKey ? locations[firstLocKey] : null;
+    _log.push(`first guid=${guids[0]}, firstItemKey=${firstItemKey}, match=${guids[0]===firstItemKey}`);
+    _log.push(`firstItem=${JSON.stringify(firstItem)}`);
+    _log.push(`firstLoc=${JSON.stringify(firstLoc)}`);
+
     const result = photos
       .map(photo => {
         const guid    = photo.photoGuid;
@@ -114,6 +123,7 @@ module.exports = async function handler(req, res) {
       .filter(Boolean)
       .reverse();
 
+    if (!result.length) return res.json({ photos: [], total: 0, _log });
     return res.json({ photos: result, total: result.length });
 
   } catch (err) {
