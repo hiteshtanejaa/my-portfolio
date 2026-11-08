@@ -3,7 +3,6 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "installCommand": null,
-  "engines": { "node": "26.x" },
   "rewrites": [
     { "source": "/girlfriend", "destination": "/girlfriend.html" },
     { "source": "/rail", "destination": "/rail.html" }
