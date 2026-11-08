@@ -4,6 +4,7 @@
   "outputDirectory": ".",
   "installCommand": null,
   "rewrites": [
-    { "source": "/girlfriend", "destination": "/girlfriend.html" }
+    { "source": "/girlfriend", "destination": "/girlfriend.html" },
+    { "source": "/rail", "destination": "/rail.html" }
   ]
 }
