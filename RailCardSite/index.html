@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Railcard Sample</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #222;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.railcard {
+    position: relative;
+    width: 430px;
+    min-height: 900px;
+    overflow: hidden;
+    padding: 45px 25px;
+    background: #ff3508;
+    color: #160d09;
+}
+
+.heading {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    margin: 12px 0 32px;
+}
+
+.portrait {
+    width: 210px;
+    height: 255px;
+    margin: auto;
+    background: #f4eee5;
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.details {
+    margin-top: 45px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 15px;
+}
+
+.field label {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+}
+
+.field p {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.validity {
+    grid-column: 1 / -1;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 35px;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.qr-placeholder {
+    width: 115px;
+    height: 115px;
+    border: 5px solid white;
+    background: repeating-linear-gradient(
+        45deg,
+        #eee 0px,
+        #eee 5px,
+        #d77b68 5px,
+        #d77b68 9px
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #222;
+    font-size: 12px;
+    text-align: center;
+}
+
+.rail-logo {
+    position: relative;
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #73f5e5;
+    box-shadow:
+        inset 0 0 0 2px rgba(255, 255, 255, 0.7),
+        0 0 12px rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rail-logo::before {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    background:
+        conic-gradient(
+            from 20deg,
+            #73f5e5,
+            #8cc8ff 18%,
+            #e8a7ff 35%,
+            #fff1a8 52%,
+            #7ff5d0 70%,
+            #b7a5ff 86%,
+            #73f5e5
+        );
+    animation: hologram-spin 18s linear infinite;
+}
+
+@keyframes hologram-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rail-mark {
+    position: relative;
+    z-index: 1;
+    width: 108px;
+    height: 88px;
+    object-fit: contain;
+    filter: hue-rotate(15deg) saturate(1.3) brightness(1.05);
+    mix-blend-mode: multiply;
+}
+
+.serial {
+    position: absolute;
+    bottom: 8px;
+    left: 25px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+
+@media(max-width: 450px) {
+    .railcard {
+        width: 100%;
+        min-height: 100vh;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="railcard">
+
+    <div class="heading">26–30 Railcard</div>
+
+    <div class="portrait">
+        <img src="unnamed.jpg" alt="Portrait">
+    </div>
+
+    <div class="details">
+
+        <div class="field">
+            <label>ISSUED TO</label>
+            <p>Hitesh Taneja</p>
+        </div>
+
+        <div class="field">
+            <label>ISSUED</label>
+            <p>Online</p>
+        </div>
+
+        <div class="field validity">
+            <label>VALID UNTIL</label>
+            <p>28 Aug 2027</p>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <div class="qr-placeholder">
+            <canvas id="demoQR" width="105" height="105"></canvas>
+        </div>
+
+        <div class="rail-logo" aria-label="Rail logo">
+            <img class="rail-mark" src="image-2.png" alt="Rail logo">
+        </div>
+    </div>
+<div class="serial" style="font-weight: 700;">No. 08ZZB0285742596</div>
+</div>
+<script>
+const canvas = document.getElementById("demoQR");
+const ctx = canvas.getContext("2d");
+
+const size = 29;
+const cell = canvas.width / size;
+
+// White background
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+// Generate QR-like random modules
+const grid = Array.from({ length: size }, () =>
+    Array.from({ length: size }, () => Math.random() > 0.48)
+);
+
+// Draw finder-style decorative patterns
+function drawFinder(startX, startY) {
+    for (let y = 0; y < 7; y++) {
+        for (let x = 0; x < 7; x++) {
+            const outer = x === 0 || x === 6 || y === 0 || y === 6;
+            const inner = x >= 2 && x <= 4 && y >= 2 && y <= 4;
+
+            grid[startY + y][startX + x] = outer || inner;
+        }
+    }
+}
+
+drawFinder(0, 0);
+drawFinder(size - 7, 0);
+drawFinder(0, size - 7);
+
+// Draw modules
+ctx.fillStyle = "#d94b3b";
+
+for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+        if (grid[y][x]) {
+            ctx.fillRect(
+                x * cell,
+                y * cell,
+                Math.ceil(cell),
+                Math.ceil(cell)
+            );
+        }
+    }
+}
+
+// Decorative central square
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(43, 43, 19, 19);
+
+ctx.strokeStyle = "#d94b3b";
+ctx.lineWidth = 4;
+ctx.strokeRect(43, 43, 19, 19);
+
+ctx.strokeRect(48, 48, 9, 9);
+</script>
+</body>
+</html>

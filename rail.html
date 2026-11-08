@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Railcard UI — Hitesh Taneja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .rail-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      background: #111;
+      padding: 60px 24px 40px;
+    }
+
+    .rail-preview-wrap {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .rail-preview-wrap iframe {
+      width: 100%;
+      height: 520px;
+      border: none;
+      display: block;
+      background: #222;
+    }
+
+    .rail-preview-caption {
+      text-align: center;
+      color: var(--text-ghost);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+      text-transform: uppercase;
+    }
+
+    .rail-details {
+      max-width: 680px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .rail-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .rail-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-ghost);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .rail-about h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.04em;
+      color: var(--text-primary);
+      margin: 0 0 20px;
+    }
+
+    .rail-about p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .rail-features {
+      margin: 40px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .rail-feature {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .rail-feature-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ff3508;
+      margin-bottom: 8px;
+    }
+
+    .rail-feature-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .rail-cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav>
+      <a href="index.html" class="logo">HT</a>
+      <div class="nav-links">
+        <a href="projects.html" style="color:var(--cyan)">Projects</a>
+        <a href="story.html">Story</a>
+        <a href="setup.html">Setup</a>
+        <a href="resume.pdf" target="_blank" rel="noopener" class="nav-cta">Resume ↗</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="projects.html">Projects</a>
+      <a href="story.html">Story</a>
+      <a href="setup.html">Setup</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <a href="https://www.linkedin.com/in/hiteshtanejaa/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/hiteshtanejaa" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <!-- HERO / LIVE PREVIEW -->
+  <div class="rail-hero">
+    <div class="rail-preview-wrap">
+      <iframe src="RailCardSite/index.html" title="26–30 Railcard UI Preview" scrolling="no"></iframe>
+    </div>
+    <p class="rail-preview-caption">Live preview — 26–30 Railcard UI</p>
+  </div>
+
+  <!-- DETAILS -->
+  <main class="subpage-wrap" style="padding-top:0">
+
+    <div class="rail-details">
+
+      <div class="rail-about">
+        <div class="subpage-eyebrow" style="margin-bottom:12px">Frontend Design · Pure HTML/CSS/JS</div>
+        <h2>26–30 RAILCARD UI</h2>
+
+        <div class="rail-tags">
+          <span class="rail-tag">HTML</span>
+          <span class="rail-tag">CSS</span>
+          <span class="rail-tag">Canvas API</span>
+          <span class="rail-tag">UI Design</span>
+          <span class="rail-tag">No Frameworks</span>
+        </div>
+
+        <p>A pixel-perfect recreation of the UK 26–30 Railcard — built entirely in vanilla HTML, CSS and JavaScript with no external libraries. The goal was to match the physical card's feel as a pure frontend exercise.</p>
+
+        <p>The holographic logo badge is a pure CSS conic-gradient animation. The QR code is generated dynamically on a Canvas element with finder-pattern decorators. Everything — card layout, portrait frame, serial number, validity grid — is hand-coded from scratch.</p>
+      </div>
+
+      <div class="rail-features">
+        <div class="rail-feature">
+          <div class="rail-feature-label">Visual</div>
+          <div class="rail-feature-title">Holographic badge — CSS conic-gradient + keyframe spin</div>
+        </div>
+        <div class="rail-feature">
+          <div class="rail-feature-label">Dynamic</div>
+          <div class="rail-feature-title">QR code generated via Canvas API on load</div>
+        </div>
+        <div class="rail-feature">
+          <div class="rail-feature-label">Layout</div>
+          <div class="rail-feature-title">CSS Grid — matches physical card proportions</div>
+        </div>
+        <div class="rail-feature">
+          <div class="rail-feature-label">Responsive</div>
+          <div class="rail-feature-title">Full-width on mobile, card width on desktop</div>
+        </div>
+      </div>
+
+      <div class="rail-cta-row">
+        <a href="RailCardSite/index.html" target="_blank" rel="noopener" class="cta-button">
+          Open Full Page <span class="cta-arrow">↗</span>
+        </a>
+        <a href="projects.html" class="cta-link">← All Projects</a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 Hitesh Taneja</span>
+      <div class="footer-links">
+        <a href="https://github.com/hiteshtanejaa" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/hiteshtanejaa/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:hiteshtaneja00@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('nav-hamburger').addEventListener('click', function() {
+      document.getElementById('nav-mobile').classList.toggle('open');
+      this.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
